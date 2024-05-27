@@ -137,11 +137,16 @@
         </header>
         <nav>
             <a href="#">Accueil</a>
-            <a href="#">Tout Parcourir</a>
+            <a href="#" id="tout-parcourir-btn">Tout Parcourir</a>
             <a href="#">Recherche</a>
             <a href="#">Rendez-vous</a>
             <a href="#">Votre Compte</a>
         </nav>
+        <div class="sub-menu" id="sub-menu">
+            <a href="activité_sportive.html" id="activité_sportive-link">Activités sportives</a>
+            <a href="sports_competition.html" id="sports-competition-link">Les Sports de compétition</a>
+            <a href="#">Salle de sport Omnes</a>
+        </div>
         <section>
             <h2>Accueil</h2>
             <p>Il s'agit de la page principale (accueil | home) de Sportify. Dans cette page, on peut trouver quelques mots de bienvenue, introduisant Sportify, ainsi qu'une section de « L'Événement de la semaine » montrant au public une activité importante de la semaine (par exemple, porte ouverte de Sportify, un match de rugby entre Omnes Education vs. Visiteurs, une rencontre avec le coach et joueurs de tennis, etc.). C'est aussi possible qu'on trouve un carrousel des images des spécialistes des sports dans cette page. C'est également possible que la section « Événement de la semaine » soit remplacée par la section « Bulletin Sportif de la semaine » qui affiche des importantes nouvelles liées aux événements sportifs (par exemple, toutes les nouvelles sur une compétition sportive collégiale, une exhibition des jeux olympiques, etc.) de Sportify.</p>
@@ -179,5 +184,18 @@
             &copy; 2024 | Sportify
         </footer>
     </div>
+<script>
+        document.getElementById('tout-parcourir-btn').addEventListener('click', function(event) {
+            event.preventDefault();
+            var subMenu = document.getElementById('sub-menu');
+            if (subMenu.style.display === 'none' || subMenu.style.display === '') {
+                subMenu.style.display = 'block';
+            } else {
+                subMenu.style.display = 'none';
+            }
+        });
+
+     
+    </script>
 </body>
 </html>
