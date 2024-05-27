@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Le BRICS</title>
-    <style>
+    <style> // debut de notre page principale
         body {
             font-family: Arial, sans-serif;
             margin: 20px;
