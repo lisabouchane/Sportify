@@ -1,0 +1,68 @@
+$(document).ready(function(){
+    var $carrousel = $('#carrousel');
+    var $img = $('#carrousel img');
+    var indexImg = $img.length - 1;
+    var i = 0;
+    var $currentImg = $img.eq(i);
+    $img.css('display', 'none');
+    $currentImg.css('display', 'block');
+    $carrousel.append('<div class="controls"><span class="prev">Precedent</span><span class="next">Suivant</span></div>');
+
+    // Génération des miniatures
+    var $thumbnails = $('.thumbnails');
+    $img.each(function(index) {
+        var $thumbnail = $('<img src="' + $(this).attr('src') + '" alt="Thumbnail ' + (index + 1) + '">');
+        $thumbnails.append($thumbnail);
+    });
+
+    // Afficher la miniature de l'image actuelle
+    $thumbnails.find('img').eq(i).addClass('active');
+
+    // Gestion du clic sur les miniatures
+    $thumbnails.find('img').click(function() {
+        var index = $(this).index();
+        i = index;
+        afficherImage();
+    });
+
+    $('.next').click(function(){ // image suivante
+        i++;
+        if (i <= indexImg){
+            afficherImage();
+        }
+        else{
+            i = indexImg;
+        }
+    });
+
+    $('.prev').click(function(){ 
+        i--;
+        if (i >= 0){
+            afficherImage();
+        }
+        else{
+            i = 0;
+        }
+    });
+
+    function afficherImage() {
+        $img.css('display', 'none');
+        $currentImg = $img.eq(i);
+        $currentImg.css('display', 'block');
+        $thumbnails.find('img').removeClass('active').eq(i).addClass('active');
+    }
+
+    function slideImg() {
+        setTimeout(function(){
+            if (i < indexImg){
+                i++;
+            } else {
+                i = 0;
+            }
+            afficherImage();
+            slideImg();
+        }, 4000);
+    }
+    
+    slideImg();
+});
