@@ -132,7 +132,7 @@
         <header>
             <div class="header-content">
                 <h1><span class="highlight">Sportify:</span> Consultation Sportive</h1>
-                <img src="images/logo.png" alt="Sportify Logo" style="height: 50px;">
+                <img src="sportify.jpg" alt="Sportify Logo" style="height: 50px;">
             </div>
         </header>
         <nav>
