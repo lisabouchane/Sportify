@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Sportify: Consultation Sportive</title>
+// css ici
     <style>
         body {
             font-family: Arial, sans-serif;
