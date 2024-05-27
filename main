@@ -72,6 +72,59 @@
             border-top: 2px solid #000;
             color: #3366cc;
         }
+        #carrousel { 
+        position: relative; 
+        height: 200px; 
+        width: 700px; 
+        margin: auto; 
+        } 
+        
+        #carrousel ul li{ 
+        position: absolute; 
+        top: 0; 
+        left: 0; 
+        } 
+        
+        .controls {
+        	position:absolute;
+        	top: 420px;
+        	width: 100%;
+        	display :flex;
+        	justify-content: space-between;
+        }
+        
+        
+        .thumbnails {
+            margin-top: 300px;
+            text-align: center;
+        }
+        
+        .thumbnails img {
+            width: 50px;
+            height: auto;
+            margin: 0 5px;
+            cursor: pointer;
+        }
+        
+        .thumbnails img.active {
+            border: 2px solid #6495ED;
+        }
+        
+        
+        .prev, .next{
+        	cursor:pointer;
+        	padding:10px;
+        	background: #6495ED;
+        	color: #FFFFFF;
+        	border:none;
+        	border-radius:5px;
+        	margin: 0 5px;
+        }
+        
+        h3 {text-align: center; 
+        color: #FFFFFF; 
+        background-color:#6495ED;
+        }
     </style>
 </head>
 <body>
