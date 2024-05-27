@@ -1,1 +1,109 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Le BRICS</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        .button {
+            display: block;
+            width: 300px;
+            margin: 10px auto;
+            padding: 15px;
+            background-color: #d4edda;
+            border: 2px solid #155724;
+            text-align: center;
+            cursor: pointer;
+            font-size: 18px;
+            color: #155724;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+        .button:hover {
+            background-color: #c3e6cb;
+        }
+        .content {
+            display: none;
+            border: 1px solid #000;
+            padding: 20px;
+            background-color: #f8f0e0;
+            margin-top: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #cce5ff;
+        }
+        td {
+            background-color: #e9ecef;
+        }
+    </style>
+    <script>
+        function showTextContent() {
+            document.getElementById("bricsTextInfo").style.display = "block";
+            document.getElementById("bricsXMLInfo").style.display = "none";
+        }
+
+        function showXMLContent() {
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    displayXML(this);
+                }
+            };
+            xmlhttp.open("GET", "1.xml", true);
+            xmlhttp.send();
+        }
+
+        function displayXML(xml) {
+            var xmlDoc = xml.responseXML;
+            var output = '<table><tr><th>Pays</th><th>Capitale</th><th>Superficie</th><th>Population</th><th>PIB</th><th>PIB par habitant</th></tr>';
+            var countries = xmlDoc.getElementsByTagName("country");
+            for (var i = 0; i < countries.length; i++) {
+                output += "<tr>";
+                output += "<td>" + countries[i].getElementsByTagName("name")[0].childNodes[0].nodeValue + "</td>";
+                output += "<td>" + countries[i].getElementsByTagName("capital")[0].childNodes[0].nodeValue + "</td>";
+                output += "<td>" + countries[i].getElementsByTagName("area")[0].childNodes[0].nodeValue + "</td>";
+                output += "<td>" + countries[i].getElementsByTagName("population")[0].childNodes[0].nodeValue + "</td>";
+                output += "<td>" + countries[i].getElementsByTagName("gdp")[0].childNodes[0].nodeValue + "</td>";
+                output += "<td>" + countries[i].getElementsByTagName("gdp_per_capita")[0].childNodes[0].nodeValue + "</td>";
+                output += "</tr>";
+            }
+            output += "</table>";
+            document.getElementById("bricsXMLInfo").innerHTML = output;
+            document.getElementById("bricsXMLInfo").style.display = "block";
+            document.getElementById("bricsTextInfo").style.display = "none";
+        }
+    </script>
+</head>
+<body>
+    <h1>Le BRICS</h1>
+    <div class="button" onclick="showTextContent()">Qu'est-ce que le BRICS?</div>
+    <div class="button" onclick="showXMLContent()">Afficher les pays qui forment le groupe BRICS</div>
+    <div id="bricsTextInfo" class="content">
+        <p>BRICS est un acronyme pour désigner un groupe de cinq pays qui se réunissent depuis 2011 en sommets annuels : Brésil, Russie, Inde, Chine et Afrique du Sud (en anglais : Brazil, Russia, India, China, South Africa).</p>
+        <p>Parmi les cinq pays composant les BRICS, le Brésil, l'Inde et la Chine sont considérés comme les grandes puissances émergentes actuelles. La Russie est une puissance en voie de restauration. Quant à l'Afrique du Sud, il s'agit davantage d'une puissance régionale. En 2015, les BRICS sont respectivement les neuvième, douzième, septième, deuxième et trente-troisième puissances mondiales (au sens du PIB nominal) et septième, sixième, troisième, deuxième et vingt-cinquième en parité de pouvoir d'achat. En dix ans, leur place dans l'économie mondiale a ainsi fortement progressé : 16 % du PIB mondial en 2001, elle atteint 27 % en 2011, 31,5 % en 2023 et pourrait atteindre, selon certaines projections, 40 % en 2025.</p>
+        <p>Les pays développés produisent aujourd'hui moins de la moitié de la richesse mondiale à la suite de la poussée économique des grands pays émergents (dont les principaux : Brésil, Inde, Chine) mais aussi de celle d'autres pays en développement (dont l'Afrique du Sud). En 2011, le PIB nominal cumulé des BRICS s'élevait à 11 221 milliards de dollars pour une population totale de près de 3 milliards d’habitants (soit 40 % de la population mondiale). En 2014, les BRICS affichaient un PIB nominal cumulé de plus de 14 000 milliards, soit pratiquement autant que celui des 28 pays de l'Union européenne réunis (18 874) et proche de celui des États-Unis (17 528).</p>
+    </div>
+    <div id="bricsXMLInfo" class="content">
+        <!-- Les données XML seront affichées ici -->
+    </div>
+</body>
+</html>
 
