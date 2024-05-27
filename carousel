@@ -8,12 +8,14 @@ $(document).ready(function(){
     $currentImg.css('display', 'block');
     $carrousel.append('<div class="controls"><span class="prev">Precedent</span><span class="next">Suivant</span></div>');
 
-    // Génération des miniatures
+    // Génération des miniatures une seule fois
     var $thumbnails = $('.thumbnails');
-    $img.each(function(index) {
-        var $thumbnail = $('<img src="' + $(this).attr('src') + '" alt="Thumbnail ' + (index + 1) + '">');
-        $thumbnails.append($thumbnail);
-    });
+    if ($thumbnails.children().length === 0) {
+        $img.each(function(index) {
+            var $thumbnail = $('<img src="' + $(this).attr('src') + '" alt="Thumbnail ' + (index + 1) + '">');
+            $thumbnails.append($thumbnail);
+        });
+    }
 
     // Afficher la miniature de l'image actuelle
     $thumbnails.find('img').eq(i).addClass('active');
