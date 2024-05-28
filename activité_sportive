@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Activités sportives - Sportify</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: black;
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .menu {
+            background-color: #333;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+        }
+        .menu a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+        .menu a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+        .coach-info {
+            background-color: #333;
+            color: white;
+            padding: 25px 0;
+            font-size: 25px;
+
+            text-align: center;
+            margin: 20px;
+        }
+
+        .coach-photo, .coach-cv {
+            width: 45%;
+            margin-left: 40px;
+            text-align: left;
+        }
+        .coach-photo img {
+            max-width: 150px;
+            height: auto;
+        }
+        .coach-info img {
+            max-width: 400px;
+            height: auto;
+        }
+        .coach-details {
+            margin-left: 20px;
+        }
+        .available {
+            color: green;
+        }
+        .unavailable {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+
+    <header>Sportify</header>
+
+    <div class="menu">
+        <a href="#musculation">Musculation</a>
+        <a href="#fitness">Fitness</a>
+        <a href="#biking">Biking</a>
+        <a href="#cardio-training">Cardio-Training</a>
+        <a href="#cours-collectifs">Cours Collectifs</a>
+    </div>
+
+    <div id="musculation" class="coach-info">
+        <h2>Musculation</h2>
+        <div class="coach-photo">
+            <img src="vida.jpg" alt="Coach Musculation">
+            <p>Nom: Marc Dubois</p>
+            <p>Bureau: B201</p>
+            <p>Disponibilité: Lundi à Vendredi, 8h - 16h</p>
+        </div>
+        <div class="coach-cv">
+            <p>CV: <a href="cv_marc_dubois.pdf">Télécharger le CV</a></p>
+            <p class="available">Disponible maintenant</p>
+            <button>Envoyer un message</button>
+            <button>Appel vocal</button>
+        </div>
+    </div>
+
+    <div id="fitness" class="coach-info">
+        <h2>Fitness</h2>
+        <img src="coach_fitness.jpg" alt="Coach Fitness">
+        <div class="coach-details">
+            <p>Nom: Sophie Martin</p>
+            <p>Bureau: B202</p>
+            <p>Disponibilité: Mardi et Jeudi, 10h - 18h</p>
+            <p>CV: <a href="cv_sophie_martin.pdf">Télécharger le CV</a></p>
+            <p class="unavailable">Non disponible maintenant</p>
+        </div>
+    </div>
+
+    <div id="biking" class="coach-info">
+        <h2>Biking</h2>
+        <img src="coach_biking.jpg" alt="Coach Biking">
+        <div class="coach-details">
+            <p>Nom: Julien Legrand</p>
+            <p>Bureau: B203</p>
+            <p>Disponibilité: Mercredi et Vendredi, 9h - 17h</p>
+            <p>CV: <a href="cv_julien_legrand.pdf">Télécharger le CV</a></p>
+            <p class="available">Disponible maintenant</p>
+            <button>Envoyer un message</button>
+            <button>Appel vocal</button>
+        </div>
+    </div>
+
+    <div id="cardio-training" class="coach-info">
+        <h2>Cardio-Training</h2>
+        <img src="coach_cardio_training.jpg" alt="Coach Cardio-Training">
+        <div class="coach-details">
+            <p>Nom: Claire Dupont</p>
+            <p>Bureau: B204</p>
+            <p>Disponibilité: Lundi et Mercredi, 8h - 16h</p>
+            <p>CV: <a href="cv_claire_dupont.pdf">Télécharger le CV</a></p>
+            <p class="unavailable">Non disponible maintenant</p>
+        </div>
+    </div>
+
+    <div id="cours-collectifs" class="coach-info">
+        <h2>Cours Collectifs</h2>
+        <img src="coach_cours_collectifs.jpg" alt="Coach Cours Collectifs">
+        <div class="coach-details">
+            <p>Nom: Lucie Bernard</p>
+            <p>Bureau: B205</p>
+            <p>Disponibilité: Lundi à Vendredi, 10h - 18h</p>
+            <p>CV: <a href="cv_lucie_bernard.pdf">Télécharger le CV</a></p>
+            <p class="available">Disponible maintenant</p>
+            <button>Envoyer un message</button>
+            <button>Appel vocal</button>
+        </div>
+    </div>
+
+</body>
+</html>
