@@ -142,11 +142,37 @@
             </ul>
         </div>
     </div>
-
     <div class="container" id="details-services">
         <div id="personnel" class="service-details">
             <h3>Personnels de la salle de sport</h3>
-            <p>Informations sur le personnel...</p>
+            <p>
+                Contactez-nous ! <br><br>
+                Responsable de la salle de sport Omnes: <br>
+                Emilie Bertrand - <br>
+                Téléphone : + 33 1 98 56 68 54 <br>
+                Mail: Bertrand_emilie@omnessports.fr <br><br>
+                
+                Responsable des coachings : <br>
+                Lisa Bonez - <br>
+                Téléphone : + 33 1 56 38 90 34 <br>
+                Mail: servicecoaching@omnessports.fr <br><br>
+                
+                Responsable des inscriptions/adhérents : <br>
+                Melinda Babac - <br>
+                Téléphone : + 33 1 75 37 22 11 <br>
+                Mail: serviceadhérents@omnessports.fr <br><br>
+                
+                Responsable de la propreté : <br>
+                Axel Taton - <br>
+                Téléphone : + 33 1 43 23 17 98 <br>
+                Mail: serviceproprete@omnessports.fr <br><br>
+                
+                Pour tout autre objet : plaintes, perturbations, détérioration du matériel etc.. <br>
+                Merci de contacter : <br>
+                Alexiane Banin - <br>
+                Téléphone : + 33 1 45 18 34 95 <br>
+                Mail: servicesetautres@omnessports.fr
+            </p>
         </div>
         <div id="horaire" class="service-details">
             <h3>Horaire de la gym</h3>
@@ -304,7 +330,7 @@
     </div>
 
     <div class="container calendar">
-        <h3>Calendrier des créneaux disponibles</h3>
+         <h3>Réservez un créneau pour visiter notre salle de sport !</h3>
         <table>
             <thead>
                 <tr>
