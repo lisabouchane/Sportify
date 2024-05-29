@@ -50,7 +50,6 @@
 
         
         .coach-photo {
-            
             /*display: inline-block;*/
             vertical-align: top;
             text-align: center;
@@ -61,15 +60,16 @@
         }
 
         .coach-cv {
-            
             margin: 02.50px;
-            /*display: inline-block;*/
             vertical-align: top;
             text-align: center;
-            /*margin: 0 2.5%; */
+        } 
+
+        .coach-dispo {
+            margin: 20px;
+            vertical-align: top;
+            text-align: center;
         }
-
-
 
         .coach-photo img {
             margin-top: 30px;
@@ -88,6 +88,88 @@
         .unavailable {
             color: red;
         }
+
+        table {
+            margin: 0 auto;
+            border-collapse: collapse;
+            width: 50%;
+        }
+
+        th, td {
+            border: 1px solid white;
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #555;
+        }
+
+        .unavailable-cell {
+            background-color: red;
+        }
+
+        .available-cell {
+            background-color: green;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 70px;
+        }
+
+        .button-container button {
+            background-color: #B4B4B4;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            color: red;
+            font-size: 18px;
+            margin: 0 10px;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+
+        .button-container button:hover {
+            background-color: #e6e6e6;
+            border-color: #999;
+        }
+
+        .button-container2 {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .button-container2 button {
+            background-color: #B4B4B4;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            color: #1D7ACC;
+            font-size: 18px;
+            margin: 0 10px;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+
+        .button-container2 button:hover {
+            background-color: #e6e6e6;
+            border-color: #999;
+        }
+
+        .extra-buttons {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        .extra-buttons button {
+            margin-top: 10px;
+        }
+        
     </style>
 </head>
 <body>
@@ -106,37 +188,144 @@
         <h2>Musculation</h2>
         <div class="coach-photo">
             <img src="vida.jpg" alt="Coach Musculation">
-            <p>Nom: Vida Coach</p>
+            <p>Vida Coach</p>
             <p>Bureau: B201</p>
-            <p>Disponibilité: Lundi à Vendredi, 8h - 16h</p>
+            <p>Tel : 06 36 59 42 61</p>
+            <p>Email : vida.coach@gmail.com</p>
         </div>
-        <div class="coach-cv">
-            <p>CV: <a href="cv_vida.pdf">Télécharger le CV</a></p>
-            <p class="available">Disponible maintenant</p>
-            <button>Envoyer un message</button>
-            <button>Appel vocal</button>
+        <div class="coach-dispo">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Jour</th>
+                        <th>Matin</th>
+                        <th>Après-midi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Lundi</td>
+                        <td class="unavailable-cell">Absent</td>
+                        <td class="available-cell">Disponible</td>
+                    </tr>
+                    <tr>
+                        <td>Mardi</td>
+                        <td class="unavailable-cell">Absent</td>
+                        <td class="unavailable-cell">Absent</td>
+                    </tr>
+                    <tr>
+                        <td>Mercredi</td>
+                        <td class="available-cell">Disponible</td>
+                        <td class="available-cell">Disponible</td>
+                    </tr>
+                    <tr>
+                        <td>Jeudi</td>
+                        <td class="unavailable-cell">Absent</td>
+                        <td class="unavailable-cell">Absent</td>
+                    </tr>
+                    <tr>
+                        <td>Vendredi</td>
+                        <td class="available-cell">Disponible</td>
+                        <td class="available-cell">Disponible</td>
+                    </tr>
+                    <tr>
+                        <td>Samedi</td>
+                        <td class="unavailable-cell">Absent</td>
+                        <td class="unavailable-cell">Absent</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
+            <div class="button-container">
+                <button>Prendre un RDV</button>
+                <button onclick="toggleExtraButtons()">Communiquer avec le coach</button>
+                <button><a href="cv_vida.pdf" style="color: inherit; text-decoration: none;">Voir son CV</a></button>
+            </div>
+            <div id="extra-buttons" class="extra-buttons">
+                <div class="button-container2">
+                    <button>Envoyer un message</button>
+                    <button>Appel audio</button>
+                    <button>Appel vidéo</button>
+                </div>
+                
+            </div>
     </div>
 
     <div id="fitness" class="coach-info">
         <h2>Fitness</h2>
-        <img src="axel.jpg" alt="Coach Fitness">
-        <div class="coach-details">
-            <p>Nom: Axel Coach</p>
+        <div class="coach-photo">
+            <img src="axel.jpg" alt="Coach Fitness">
+            <p>Axel Coach</p>
             <p>Bureau: B202</p>
-            <p>Disponibilité: Mardi et Jeudi, 10h - 18h</p>
-            <p>CV: <a href="cv_axel.pdf">Télécharger le CV</a></p>
-            <p class="unavailable">Non disponible maintenant</p>
+            <p>Tel : 06 65 94 50 92</p>
+            <p>Email : axel.coach@gmail.com</p>
         </div>
+                <div class="coach-dispo">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Jour</th>
+                        <th>Matin</th>
+                        <th>Après-midi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Lundi</td>
+                        <td class="unavailable-cell">Absent</td>
+                        <td class="available-cell">Disponible</td>
+                    </tr>
+                    <tr>
+                        <td>Mardi</td>
+                        <td class="unavailable-cell">Absent</td>
+                        <td class="unavailable-cell">Absent</td>
+                    </tr>
+                    <tr>
+                        <td>Mercredi</td>
+                        <td class="available-cell">Disponible</td>
+                        <td class="available-cell">Disponible</td>
+                    </tr>
+                    <tr>
+                        <td>Jeudi</td>
+                        <td class="unavailable-cell">Absent</td>
+                        <td class="unavailable-cell">Absent</td>
+                    </tr>
+                    <tr>
+                        <td>Vendredi</td>
+                        <td class="available-cell">Disponible</td>
+                        <td class="available-cell">Disponible</td>
+                    </tr>
+                    <tr>
+                        <td>Samedi</td>
+                        <td class="unavailable-cell">Absent</td>
+                        <td class="unavailable-cell">Absent</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+            <div class="button-container">
+                <button>Prendre un RDV</button>
+                <button onclick="toggleExtraButtons()">Communiquer avec le coach</button>
+                <button><a href="cv_axel.pdf" style="color: inherit; text-decoration: none;">Voir son CV</a></button>
+            </div>
+            <div id="extra-buttons" class="extra-buttons">
+                <div class="button-container2">
+                    <button>Envoyer un message</button>
+                    <button>Appel audio</button>
+                    <button>Appel vidéo</button>
+                </div>
+                
+            </div>
     </div>
 
     <div id="biking" class="coach-info">
         <h2>Biking</h2>
         <img src="lisa.jpg" alt="Coach Biking">
         <div class="coach-details">
-            <p>Nom: Lisa Coach</p>
+            <p>Lisa Coach</p>
             <p>Bureau: B203</p>
-            <p>Disponibilité: Mercredi et Vendredi, 9h - 17h</p>
+            <p>Tel : 06 08 56 48 96</p>
+            <p>Email : lisa.coach@gmail.com</p>
             <p>CV: <a href="cv_lisa.pdf">Télécharger le CV</a></p>
             <p class="available">Disponible maintenant</p>
             <button>Envoyer un message</button>
@@ -148,9 +337,10 @@
         <h2>Cardio-Training</h2>
         <img src="melinda.jpg" alt="Coach Cardio-Training">
         <div class="coach-details">
-            <p>Nom: Melinda Coach</p>
+            <p>Melinda Coach</p>
             <p>Bureau: B204</p>
-            <p>Disponibilité: Lundi et Mercredi, 8h - 16h</p>
+            <p>Tel : 06 95 96 62 94</p>
+            <p>Email : melinda.coach@gmail.com</p>
             <p>CV: <a href="cv_melinda.pdf">Télécharger le CV</a></p>
             <p class="unavailable">Non disponible maintenant</p>
         </div>
@@ -160,15 +350,27 @@
         <h2>Cours Collectifs</h2>
         <img src="alexiane.jpg" alt="Coach Cours Collectifs">
         <div class="coach-details">
-            <p>Nom: Alex Coach</p>
+            <p>Alex Coach</p>
             <p>Bureau: B205</p>
-            <p>Disponibilité: Lundi à Vendredi, 10h - 18h</p>
+            <p>Tel : 07 36 98 52 12</p>
+            <p>Email : alex.coach@gmail.com</p>
             <p>CV: <a href="cv_alexiane.pdf">Télécharger le CV</a></p>
             <p class="available">Disponible maintenant</p>
             <button>Envoyer un message</button>
             <button>Appel vocal</button>
         </div>
     </div>
+
+    <script>
+        function toggleExtraButtons() {
+            var extraButtons = document.getElementById('extra-buttons');
+            if (extraButtons.style.display === 'none' || extraButtons.style.display === '') {
+                extraButtons.style.display = 'flex';
+            } else {
+                extraButtons.style.display = 'none';
+            }
+        }
+    </script>
 
 </body>
 </html>
