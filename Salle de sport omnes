@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salle de sport Omnes</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+        header, footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+        }
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .contact-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #f9f9f9;
+            padding: 20px;
+            border: 1px solid #ddd;
+        }
+        .contact-info img {
+            max-width: 200px;
+            border-radius: 10px;
+        }
+        .contact-info div {
+            flex: 1;
+            padding: 0 20px;
+        }
+        .services {
+            margin-top: 20px;
+        }
+        .services h3 {
+            margin-bottom: 10px;
+        }
+        .services ul {
+            list-style-type: none;
+            padding: 0;
+            display: none;
+        }
+        .services ul.active {
+            display: block;
+        }
+        .services ul li {
+            background-color: #f9f9f9;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+        }
+        .services ul li a {
+            text-decoration: none;
+            color: #333;
+        }
+        .service-details {
+            display: none;
+            margin-top: 20px;
+        }
+        .service-details.active {
+            display: block;
+        }
+        .calendar {
+            margin-top: 20px;
+        }
+        .calendar table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .calendar th, .calendar td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+        }
+        .available {
+            background-color: green;
+            color: white;
+            cursor: pointer;
+        }
+        .unavailable {
+            background-color: red;
+            color: white;
+        }
+        .not-allowed {
+            background-color: white;
+        }
+        .questionnaire form {
+            display: flex;
+            flex-direction: column;
+        }
+        .questionnaire label {
+            margin-top: 10px;
+        }
+        .questionnaire input, .questionnaire select, .questionnaire textarea {
+            padding: 10px;
+            margin-top: 5px;
+        }
+        .questionnaire button {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #333;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Salle de sport Omnes</h1>
+    </header>
+    <div class="container">
+        <div class="contact-info">
+            <img src="salle_de_sport_omnes.jpg" alt="Salle de sport Omnes">
+            <div>
+                <h2>Salle de sport Omnes</h2>
+                <p>Salle: G-001</p>
+                <p>Téléphone: +33 01 22 33 44 55</p>
+                <p>Email: salle.sport@omnessports.fr</p>
+                <button onclick="toggleServices()">Nos services</button>
+            </div>
+        </div>
+        <div id="services" class="services">
+            <h3>Nos services</h3>
+            <ul>
+                <li><a href="#" onclick="showDetails('personnel')">Personnels de la salle de sport</a></li>
+                <li><a href="#" onclick="showDetails('horaire')">Horaire de la gym</a></li>
+                <li><a href="#" onclick="showDetails('regles-machines')">Règles sur l’utilisation des machines</a></li>
+                <li><a href="#" onclick="showDetails('nouveaux-clients')">Nouveaux clients</a></li>
+                <li><a href="#" onclick="showDetails('alimentation')">Alimentation et nutrition</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="container" id="details-services">
+        <div id="personnel" class="service-details">
+            <h3>Personnels de la salle de sport</h3>
+            <p>Informations sur le personnel...</p>
+        </div>
+        <div id="horaire" class="service-details">
+            <h3>Horaire de la gym</h3>
+            <p>
+                Les horaires de la salle de sport Omnes :
+                <ul>
+                    <li>Lundi : Salle de sport fermée</li>
+                    <li>Mardi au vendredi : 10h-13h et 14h-22h</li>
+                    <li>Samedi : 9h-17h</li>
+                    <li>Dimanche : 9h-15h</li>
+                </ul>
+            </p>
+        </div>
+        <div id="regles-machines" class="service-details">
+            <h3>Règles sur l’utilisation des machines</h3>
+            <p>
+                Pour des raisons d'hygiène et de courtoisie, le port d'une tenue propre et convenable est exigé. Pour des raisons de sécurité, la tenue doit être appropriée à la pratique de l'activité sportive exercée.
+                <br><br>
+                L'utilisation du téléphone portable est interdite en dehors des zones spécifiquement autorisées. La nourriture est interdite dans les salles d'entraînement. Il est interdit de jeter des détritus quelconques en dehors des poubelles.
+                <br><br>
+                La serviette est obligatoire pour toute activité et particulièrement pour l'utilisation des appareils de musculation et de cardio, fitness. Pour des raisons de sécurité, capuches, casquettes, bonnets ou tout autre couvre-chef sont interdits et devront être laissés au vestiaire, sauf présentation d'un certificat médical s'y opposant.
+                <br><br>
+                Le Membre doit respecter les bonnes mœurs envers les autres clients et l'ensemble du personnel des Clubs. 
+                <br><br>
+                Le matériel utilisé lors des séances d'entraînement doit impérativement être rangé au fur et à mesure après son usage pour en faciliter l'accès aux Membres suivants.
+                <br><br>
+                L'utilisation des haltères ou de tout autre matériel de musculation doit se faire dans les espaces prévus à cet effet et seul doit être utilisé le matériel mis à disposition par le Club. Le Membre a l'obligation de nettoyer sa place et son matériel après utilisation à l'aide des produits de nettoyage dédiés à cet effet.
+            </p>
+        </div>
+        <div id="nouveaux-clients" class="service-details">
+            <h3>Nouveaux clients</h3>
+            <div class="questionnaire">
+                <form>
+                    <label for="note-generale">Note générale sur notre salle de sport (1 à 10 étoiles) :</label>
+                    <select id="note-generale" name="note-generale">
+                        <option value="1">1 étoile</option>
+                        <option value="2">2 étoiles</option>
+                        <option value="3">3 étoiles</option>
+                        <option value="4">4 étoiles</option>
+                        <option value="5">5 étoiles</option>
+                        <option value="6">6 étoiles</option>
+                        <option value="7">7 étoiles</option>
+                        <option value="8">8 étoiles</option>
+                        <option value="9">9 étoiles</option>
+                        <option value="10">10 étoiles</option>
+                    </select>
+
+                    <label for="proprete-locaux">Que pensez-vous de la propreté de nos locaux ? (1 à 10 étoiles) :</label>
+                    <select id="proprete-locaux" name="proprete-locaux">
+                        <option value="1">1 étoile</option>
+                        <option value="2">2 étoiles</option>
+                        <option value="3">3 étoiles</option>
+                        <option value="4">4 étoiles</option>
+                        <option value="5">5 étoiles</option>
+                        <option value="6">6 étoiles</option>
+                        <option value="7">7 étoiles</option>
+                        <option value="8">8 étoiles</option>
+                        <option value="9">9 étoiles</option>
+                        <option value="10">10 étoiles</option>
+                    </select>
+
+                    <label for="proprete-machines">Que pensez-vous de la propreté de nos machines ? (1 à 10 étoiles) :</label>
+                    <select id="proprete-machines" name="proprete-machines">
+                        <option value="1">1 étoile</option>
+                        <option value="2">2 étoiles</option>
+                        <option value="3">3 étoiles</option>
+                        <option value="4">4 étoiles</option>
+                        <option value="5">5 étoiles</option>
+                        <option value="6">6 étoiles</option>
+                        <option value="7">7 étoiles</option>
+                        <option value="8">8 étoiles</option>
+                        <option value="9">9 étoiles</option>
+                        <option value="10">10 étoiles</option>
+                    </select>
+
+                    <label for="machines-ajouter">Quelles machines faudrait-il ajouter ? :</label>
+                    <textarea id="machines-ajouter" name="machines-ajouter" rows="3"></textarea>
+
+                    <label for="avis-coach">Que pensez-vous de nos coachs ? :</label>
+                    <textarea id="avis-coach" name="avis-coach" rows="3"></textarea>
+
+                    <label for="cours-collectifs">Votre avis sur les cours collectifs (1 à 10 étoiles) :</label>
+                    <select id="cours-collectifs" name="cours-collectifs">
+                        <option value="1">1 étoile</option>
+                        <option value="2">2 étoiles</option>
+                        <option value="3">3 étoiles</option>
+                        <option value="4">4 étoiles</option>
+                        <option value="5">5 étoiles</option>
+                        <option value="6">6 étoiles</option>
+                        <option value="7">7 étoiles</option>
+                        <option value="8">8 étoiles</option>
+                        <option value="9">9 étoiles</option>
+                        <option value="10">10 étoiles</option>
+                    </select>
+
+                    <label for="continuer-venir">Allez-vous continuer à venir chez nous ? :</label>
+                    <textarea id="continuer-venir" name="continuer-venir" rows="3"></textarea>
+
+                    <label for="decouverte-salle">Par quels moyens avez-vous découvert notre salle de sport ? :</label>
+                    <select id="decouverte-salle" name="decouverte-salle">
+                        <option value="connaissances">Connaissances</option>
+                        <option value="publicites">Publicités</option>
+                        <option value="proximite">Proximité de mon lieu de vie</option>
+                        <option value="reseaux-sociaux">Réseaux sociaux</option>
+                        <option value="autres">Autres</option>
+                    </select>
+
+                    <label for="conseiller-proches">Conseillerez-vous cette salle de sport à vos proches ? :</label>
+                    <textarea id="conseiller-proches" name="conseiller-proches" rows="3"></textarea>
+
+                    <label for="amelioration-equipements">Propositions d'amélioration de nos équipements :</label>
+                    <textarea id="amelioration-equipements" name="amelioration-equipements" rows="3"></textarea>
+
+                    <button type="submit">Envoyer le questionnaire</button>
+                </form>
+            </div>
+        </div>
+        <div id="alimentation" class="service-details">
+            <h3>Alimentation et nutrition</h3>
+            <p>
+                Les conseils de nos coachs pour une bonne alimentation :
+                <br><br>
+                L’équilibre, c’est la variété. Le sportif peut goûter à tout, avec modération.
+                <br><br>
+                Le sportif de haut niveau sera souvent suivi par un spécialiste médecin ou nutritionniste, qui accompagnera son alimentation afin d’optimiser la performance.
+                <br><br>
+                Pour en savoir plus, de nombreux livres de diététique, d’ouvrages ou d’articles, ont été publiés.
+                <br><br>
+                Quelques conseils de nutrition :
+                <ul>
+                    <li>Manger au moins 5 fruits et légumes par jour.</li>
+                    <li>Le petit déjeuner doit être un vrai repas.</li>
+                    <li>Le goûter ne doit pas être oublié.</li>
+                    <li>Il est nécessaire d’apporter des aliments céréaliers (pain, pâtes, riz…), des pommes de terre ou des légumes secs à chaque repas en favorisant les céréales complètes.</li>
+                    <li>Chaque repas doit comporter une ration de lait, laitage ou fromage.</li>
+                    <li>La viande, le poisson ou les œufs doivent figurer au moins une fois par jour, en privilégiant le plus souvent possible le poisson.</li>
+                    <li>Même si l’on fait du sport pour maigrir, ne pas oublier l’importance des matières grasses en quantité limitée et en privilégiant celles d’origine végétale.</li>
+                    <li>Les produits sucrés seront consommés en quantité raisonnable (confiseries, pâtisseries, barres chocolatées). Ils seront par contre réservés à l’alimentation de l’effort (barres de céréales, sucre, miel, jus de fruits, pâtes de fruits). Attention surtout aux aliments à la fois gras et sucrés. Vérifiez l’étiquetage systématiquement.</li>
+                    <li>Si vous consommez des boissons alcoolisées, votre apport quotidien d’alcool ne devra pas dépasser deux verres de vin de 10cl, ou deux bières de 25 cl, ou 6cl d’alcool fort.</li>
+                    <li>Avant, pendant et après l’effort, n’oubliez pas de vous hydrater, boire de l’eau à volonté avant d’avoir soif.</li>
+                </ul>
+                Quelques erreurs sont faciles à éviter :
+                <ul>
+                    <li>Évitez de faire du sport immédiatement après le repas, laissez passer au moins trois heures.</li>
+                    <li>Évitez les produits trop sucrés. Attention aux boissons sucrées, aux confiseries, aux aliments gras et sucrés à la fois, aux bonbons ou toute autre source d’apports sucrés immédiats tels miel, confiture. Par ailleurs, le sucre joue un rôle important sur l’apparition de caries dentaires.</li>
+                    <li>N’abusez pas des vitamines sans l’avis de votre médecin.</li>
+                    <li>Évitez l’utilisation de suppléments alimentaires ou de complexes nutritionnels vitaminés. En effet, actuellement, aucun supplément nutritionnel vantant les bienfaits pour la santé et les performances, ne bénéficie de justification scientifique permettant d’être conseillé aux sportifs.</li>
+                    <li>Après l’effort, évitez les repas trop riches pouvant gêner une bonne récupération.</li>
+                    <li>Supprimez tabac et alcool (maximum 2 verres de vin par jour). Votre souffle et votre condition physique s’en trouveront brutalement améliorés.</li>
+                    <li>N’utilisez en aucun cas de produits interdits ou de substances dopantes, qui contribuent dans certains cas à améliorer les performances, mais surtout nuisent gravement à la santé.</li>
+                </ul>
+                Une bonne alimentation contribue à une bonne pratique sportive. La variété et la diversité de l’alimentation du sportif dépend à la fois de son sexe, de son âge, de son niveau de pratique et de sa quantité de pratique.
+            </p>
+        </div>
+    </div>
+
+    <div class="container calendar">
+        <h3>Calendrier des créneaux disponibles</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Heure</th>
+                    <th>Lundi</th>
+                    <th>Mardi</th>
+                    <th>Mercredi</th>
+                    <th>Jeudi</th>
+                    <th>Vendredi</th>
+                </tr>
+            </thead>
+            <tbody>
+                <script>
+                    const hours = ['10h', '11h', '12h', '13h', '14h', '15h', '16h', '17h'];
+                    const days = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi'];
+                    const calendarData = {
+                        'Lundi': ['not-allowed', 'not-allowed', 'not-allowed', 'not-allowed', 'not-allowed', 'not-allowed', 'not-allowed', 'not-allowed'],
+                        'Mardi': ['available', 'available', 'unavailable', 'available', 'not-allowed', 'available', 'unavailable', 'available'],
+                        'Mercredi': ['available', 'available', 'available', 'available', 'unavailable', 'not-allowed', 'available', 'available'],
+                        'Jeudi': ['available', 'unavailable', 'available', 'available', 'not-allowed', 'unavailable', 'available', 'available'],
+                        'Vendredi': ['available', 'available', 'available', 'available', 'available', 'unavailable', 'not-allowed', 'available']
+                    };
+
+                    hours.forEach((hour, i) => {
+                        document.write('<tr>');
+                        document.write(`<td>${hour}</td>`);
+                        days.forEach(day => {
+                            const status = calendarData[day][i];
+                            document.write(`<td class="${status}" onclick="bookSlot('${day}', '${hour}', '${status}')">${status === 'available' ? 'Disponible' : ''}</td>`);
+                        });
+                        document.write('</tr>');
+                    });
+                </script>
+            </tbody>
+        </table>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Salle de sport Omnes. Tous droits réservés.</p>
+    </footer>
+
+    <script>
+        function toggleServices() {
+            const servicesList = document.querySelector('.services ul');
+            servicesList.classList.toggle('active');
+        }
+
+        function showDetails(sectionId) {
+            const sections = document.querySelectorAll('.service-details');
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+            document.getElementById(sectionId).classList.add('active');
+        }
+
+        function bookSlot(day, hour, status) {
+            if (status === 'available') {
+                alert(`Vous avez réservé un créneau le ${day} à ${hour}.`);
+                // Logique pour mettre à jour la base de données ici.
+            } else {
+                alert('Ce créneau n\'est pas disponible pour la réservation.');
+            }
+        }
+    </script>
+</body>
+</html>
