@@ -238,7 +238,7 @@
         </div>
             <div class="button-container">
                 <button>Prendre un RDV</button>
-                <button onclick="toggleExtraButtons()">Communiquer avec le coach</button>
+                <button onclick="toggleExtraButtons(this)">Communiquer avec le coach</button>
                 <button><a href="cv_vida.pdf" style="color: inherit; text-decoration: none;">Voir son CV</a></button>
             </div>
             <div id="extra-buttons" class="extra-buttons">
@@ -303,67 +303,221 @@
                 </tbody>
             </table>
         </div>
-            <div class="button-container">
-                <button>Prendre un RDV</button>
-                <button onclick="toggleExtraButtons()">Communiquer avec le coach</button>
-                <button><a href="cv_axel.pdf" style="color: inherit; text-decoration: none;">Voir son CV</a></button>
+        <div class="button-container">
+            <button>Prendre un RDV</button>
+            <button onclick="toggleExtraButtons(this)">Communiquer avec le coach</button>
+            <button><a href="cv_axel.pdf" style="color: inherit; text-decoration: none;">Voir son CV</a></button>
+        </div>
+        <div id="extra-buttons" class="extra-buttons">
+            <div class="button-container2">
+                <button>Envoyer un message</button>
+                <button>Appel audio</button>
+                <button>Appel vidéo</button>
             </div>
-            <div id="extra-buttons" class="extra-buttons">
-                <div class="button-container2">
-                    <button>Envoyer un message</button>
-                    <button>Appel audio</button>
-                    <button>Appel vidéo</button>
-                </div>
-                
-            </div>
+        </div>
     </div>
 
     <div id="biking" class="coach-info">
         <h2>Biking</h2>
-        <img src="lisa.jpg" alt="Coach Biking">
-        <div class="coach-details">
+        <div class="coach-photo">
+            <img src="lisa.jpg" alt="Coach Biking">
             <p>Lisa Coach</p>
-            <p>Bureau: B203</p>
-            <p>Tel : 06 08 56 48 96</p>
+            <p>Bureau: B212</p>
+            <p>Tel : 06 75 91 60 32</p>
             <p>Email : lisa.coach@gmail.com</p>
-            <p>CV: <a href="cv_lisa.pdf">Télécharger le CV</a></p>
-            <p class="available">Disponible maintenant</p>
-            <button>Envoyer un message</button>
-            <button>Appel vocal</button>
+        </div>
+                <div class="coach-dispo">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Jour</th>
+                        <th>Matin</th>
+                        <th>Après-midi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Lundi</td>
+                        <td class="unavailable-cell">Absent</td>
+                        <td class="available-cell">Disponible</td>
+                    </tr>
+                    <tr>
+                        <td>Mardi</td>
+                        <td class="unavailable-cell">Absent</td>
+                        <td class="unavailable-cell">Absent</td>
+                    </tr>
+                    <tr>
+                        <td>Mercredi</td>
+                        <td class="available-cell">Disponible</td>
+                        <td class="available-cell">Disponible</td>
+                    </tr>
+                    <tr>
+                        <td>Jeudi</td>
+                        <td class="unavailable-cell">Absent</td>
+                        <td class="unavailable-cell">Absent</td>
+                    </tr>
+                    <tr>
+                        <td>Vendredi</td>
+                        <td class="available-cell">Disponible</td>
+                        <td class="available-cell">Disponible</td>
+                    </tr>
+                    <tr>
+                        <td>Samedi</td>
+                        <td class="unavailable-cell">Absent</td>
+                        <td class="unavailable-cell">Absent</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="button-container">
+            <button>Prendre un RDV</button>
+            <button onclick="toggleExtraButtons(this)">Communiquer avec le coach</button>
+            <button><a href="cv_lisa.pdf" style="color: inherit; text-decoration: none;">Voir son CV</a></button>
+        </div>
+        <div id="extra-buttons" class="extra-buttons">
+            <div class="button-container2">
+                <button>Envoyer un message</button>
+                <button>Appel audio</button>
+                <button>Appel vidéo</button>
+            </div>
         </div>
     </div>
 
     <div id="cardio-training" class="coach-info">
         <h2>Cardio-Training</h2>
-        <img src="melinda.jpg" alt="Coach Cardio-Training">
-        <div class="coach-details">
+        <div class="coach-photo">
+            <img src="melinda.jpg" alt="Coach Cardio-Training">
             <p>Melinda Coach</p>
-            <p>Bureau: B204</p>
-            <p>Tel : 06 95 96 62 94</p>
+            <p>Bureau: B213</p>
+            <p>Tel : 06 55 41 30 58</p>
             <p>Email : melinda.coach@gmail.com</p>
-            <p>CV: <a href="cv_melinda.pdf">Télécharger le CV</a></p>
-            <p class="unavailable">Non disponible maintenant</p>
+        </div>
+                <div class="coach-dispo">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Jour</th>
+                        <th>Matin</th>
+                        <th>Après-midi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Lundi</td>
+                        <td class="unavailable-cell">Absent</td>
+                        <td class="available-cell">Disponible</td>
+                    </tr>
+                    <tr>
+                        <td>Mardi</td>
+                        <td class="unavailable-cell">Absent</td>
+                        <td class="unavailable-cell">Absent</td>
+                    </tr>
+                    <tr>
+                        <td>Mercredi</td>
+                        <td class="available-cell">Disponible</td>
+                        <td class="available-cell">Disponible</td>
+                    </tr>
+                    <tr>
+                        <td>Jeudi</td>
+                        <td class="unavailable-cell">Absent</td>
+                        <td class="unavailable-cell">Absent</td>
+                    </tr>
+                    <tr>
+                        <td>Vendredi</td>
+                        <td class="available-cell">Disponible</td>
+                        <td class="available-cell">Disponible</td>
+                    </tr>
+                    <tr>
+                        <td>Samedi</td>
+                        <td class="unavailable-cell">Absent</td>
+                        <td class="unavailable-cell">Absent</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="button-container">
+            <button>Prendre un RDV</button>
+            <button onclick="toggleExtraButtons(this)">Communiquer avec le coach</button>
+            <button><a href="cv_melinda.pdf" style="color: inherit; text-decoration: none;">Voir son CV</a></button>
+        </div>
+        <div id="extra-buttons" class="extra-buttons">
+            <div class="button-container2">
+                <button>Envoyer un message</button>
+                <button>Appel audio</button>
+                <button>Appel vidéo</button>
+            </div>
         </div>
     </div>
 
     <div id="cours-collectifs" class="coach-info">
         <h2>Cours Collectifs</h2>
-        <img src="alexiane.jpg" alt="Coach Cours Collectifs">
-        <div class="coach-details">
+        <div class="coach-photo">
+            <img src="alexiane.jpg" alt="Coach Cours-Collectifs">
             <p>Alex Coach</p>
-            <p>Bureau: B205</p>
-            <p>Tel : 07 36 98 52 12</p>
-            <p>Email : alex.coach@gmail.com</p>
-            <p>CV: <a href="cv_alexiane.pdf">Télécharger le CV</a></p>
-            <p class="available">Disponible maintenant</p>
-            <button>Envoyer un message</button>
-            <button>Appel vocal</button>
+            <p>Bureau: B214</p>
+            <p>Tel : 07 89 63 45 12</p>
+            <p>Email : alexiane.coach@gmail.com</p>
+        </div>
+                <div class="coach-dispo">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Jour</th>
+                        <th>Matin</th>
+                        <th>Après-midi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Lundi</td>
+                        <td class="unavailable-cell">Absent</td>
+                        <td class="available-cell">Disponible</td>
+                    </tr>
+                    <tr>
+                        <td>Mardi</td>
+                        <td class="unavailable-cell">Absent</td>
+                        <td class="unavailable-cell">Absent</td>
+                    </tr>
+                    <tr>
+                        <td>Mercredi</td>
+                        <td class="available-cell">Disponible</td>
+                        <td class="available-cell">Disponible</td>
+                    </tr>
+                    <tr>
+                        <td>Jeudi</td>
+                        <td class="unavailable-cell">Absent</td>
+                        <td class="unavailable-cell">Absent</td>
+                    </tr>
+                    <tr>
+                        <td>Vendredi</td>
+                        <td class="available-cell">Disponible</td>
+                        <td class="available-cell">Disponible</td>
+                    </tr>
+                    <tr>
+                        <td>Samedi</td>
+                        <td class="unavailable-cell">Absent</td>
+                        <td class="unavailable-cell">Absent</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="button-container">
+            <button>Prendre un RDV</button>
+            <button onclick="toggleExtraButtons(this)">Communiquer avec le coach</button>
+            <button><a href="cv_alexiane.pdf" style="color: inherit; text-decoration: none;">Voir son CV</a></button>
+        </div>
+        <div id="extra-buttons" class="extra-buttons">
+            <div class="button-container2">
+                <button>Envoyer un message</button>
+                <button>Appel audio</button>
+                <button>Appel vidéo</button>
+            </div>
         </div>
     </div>
 
     <script>
-        function toggleExtraButtons() {
-            var extraButtons = document.getElementById('extra-buttons');
+        function toggleExtraButtons(button) {
+            var extraButtons = button.parentElement.nextElementSibling;
             if (extraButtons.style.display === 'none' || extraButtons.style.display === '') {
                 extraButtons.style.display = 'flex';
             } else {
