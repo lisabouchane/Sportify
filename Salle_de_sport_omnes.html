@@ -115,12 +115,120 @@
             border: none;
             cursor: pointer;
         }
+
+        .wrapper {
+            border: 1px solid #ccc;
+            max-width: 960px;
+            margin: 20px auto;
+            padding: 10px;
+        }
+
+
+        .highlight {
+            color: black;
+            font-weight: bold;
+        }
+
+        nav {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        nav a {
+            display: inline-block;
+            background-color: #ccc;
+            border: 2px solid #555;
+            padding: 10px 20px;
+            margin: 0 5px;
+            text-decoration: none;
+            border-radius: 10px;
+            color: #D12424;
+        }
+
+        nav a:hover {
+            background-color: #ccc;
+        }
+
+        .sub-menu {
+            display: none;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .sub-menu a {
+            display: inline-block;
+            background-color: #ccc;
+            border: 1px solid #aaa;
+            padding: 8px 16px;
+            margin: 0 5px;
+            text-decoration: none;
+            border-radius: 8px;
+            color: #3366cc;
+            text-align: center;
+        }
+
+        .sub-menu a:hover {
+            background-color: #e0e0e0;
+            text-align: center;
+        }
+
+        section {
+            text-align: center;
+            padding: 50px;
+            font-size: 24px;
+            color: black;
+            border: 2px solid #ddd;
+            margin-bottom: 20px;
+        }
+
+
+        h1 {
+            text-align: center;
+            color: white;
+            background-color: #F5A510;
+        }
+
+        .controls{
+            position: absolute;
+            top: 420px; 
+            width: 100%;
+            display: flex;
+            justify-content: center; 
+        }
+
+        .prev, .next{
+            cursor: pointer;
+            padding: 10px 20px; 
+            background: #F5A510; 
+            color: white;
+            border: none;
+            border-radius: 5px;
+            margin: 0 5px; 
+        }
+
+        .prev:hover, .next:hover{
+            background: #F5A510; 
+        }
     </style>
 </head>
 <body>
     <header>
         <h1>Salle de sport Omnes</h1>
     </header>
+    <div class = "wrapper">
+        <nav>
+            <a href="accueil.html">Accueil</a>
+            <a href="#" id="tout-parcourir-btn">Tout Parcourir</a>
+            <a href="#">Recherche</a>
+            <a href="#">Rendez-vous</a>
+            <a href="#">Votre Compte</a>
+        </nav>
+        <div class="sub-menu" id="sub-menu">
+            <a href="activité_sportive.html" id="activité_sportive-link">Activités sportives</a>
+            <a href="sports_competition.html" id="sports-competition-link">Les Sports de compétition</a>
+            <a href="Salle_de_sport_omnes.html" id="salle-de-sport-link">Salle de sport Omnes</a>
+        </div>
+    </div>
     <div class="container">
         <div class="contact-info">
             <img src="salle_de_sport_omnes.jpg" alt="Salle de sport Omnes">
@@ -396,5 +504,19 @@
             }
         }
     </script>
+    <script>
+        document.getElementById('tout-parcourir-btn').addEventListener('click', function(event) {
+            event.preventDefault();
+            var subMenu = document.getElementById('sub-menu');
+            if (subMenu.style.display === 'none' || subMenu.style.display === '') {
+                subMenu.style.display = 'block';
+            } else {
+                subMenu.style.display = 'none';
+            }
+        });
+    
+     
+    </script>
+    
 </body>
 </html>
