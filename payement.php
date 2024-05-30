@@ -118,7 +118,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         input[type="text"],
         input[type="password"],
-        input[type="submit"] {
+        input[type="submit"],
+        select {
             width: 100%;
             padding: 10px;
             margin-bottom: 10px;
@@ -196,7 +197,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <h3>Informations de paiement</h3>
         <div>
             <label for="card_type">Type de carte :</label>
-            <input type="text" id="card_type" name="card_type" required>
+            <select id="card_type" name="card_type" required>
+                <option value="Visa">Visa</option>
+                <option value="MasterCard">MasterCard</option>
+                <option value="American Express">American Express</option>
+                <option value="PayPal">PayPal</option>
+            </select>
         </div>
         <div>
             <label for="card_number">Numéro de carte :</label>
