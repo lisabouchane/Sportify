@@ -4,34 +4,74 @@ include("config.php");
 
 $message = '';
 
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    // Clients
+    if (isset($_POST['courriel_client']) && isset($_POST['mdp_client'])) {
+        $courriel_client = $_POST['courriel_client'];
+        $mdp_client = $_POST['mdp_client'];
 
-//Clients 
-if (isset($_POST['courriel_client']) && isset($_POST['mdp_client'])) {
-    $courriel_client = $_POST['courriel_client'];
-    $mdp_client = $_POST['mdp_client'];
+        $sql = "SELECT * FROM clients WHERE courriel_client = :courriel_client";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute(['courriel_client' => $courriel_client]);
+        $user = $stmt->fetch();
 
-    $sql = "SELECT * FROM clients WHERE courriel_client = :courriel_client";
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute(['courriel_client' => $courriel_client]);
-    $user = $stmt->fetch();
+        if ($user) {
+            if (password_verify($mdp_client, $user['mdp_client'])) {
+                session_start();
+                $_SESSION['user_id'] = $user['id_client'];
+                header('Location: dashboard_client.php');
+                exit;
+            } else {
+                $message = 'Mauvais identifiants.';
+            }
+        } else {
+            // Redirection vers la page d'inscription si l'utilisateur n'est pas trouvé
+            header('Location: register_client.php');
+            exit;
+        }
+    }
+    // Admins
+    elseif (isset($_POST['courriel_admin']) && isset($_POST['mdp_admin'])) {
+        $courriel_admin = $_POST['courriel_admin'];
+        $mdp_admin = $_POST['mdp_admin'];
 
-    if ($user && password_verify($mdp_client, $user['mdp_client'])) {
-        session_start();
-        $_SESSION['user_id'] = $user['id_client'];
-        header('Location: dashboard_client.php');
-        exit;
+        $sql = "SELECT * FROM administrateurs WHERE courriel_admin = :courriel_admin";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute(['courriel_admin' => $courriel_admin]);
+        $admin = $stmt->fetch();
+
+        if ($admin && password_verify($mdp_admin, $admin['mdp_admin'])) {
+            session_start();
+            $_SESSION['admin_id'] = $admin['id_admin'];
+            header('Location: dashboard_admin.php');
+            exit;
+        } else {
+            $message = 'Mauvais identifiants.';
+        }
+    }
+    // Coachs
+    elseif (isset($_POST['courriel_coach']) && isset($_POST['mdp_coach'])) {
+        $courriel_coach = $_POST['courriel_coach'];
+        $mdp_coach = $_POST['mdp_coach'];
+
+        $sql = "SELECT * FROM coachs WHERE courriel_coach = :courriel_coach";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute(['courriel_coach' => $courriel_coach]);
+        $coach = $stmt->fetch();
+
+        if ($coach && password_verify($mdp_coach, $coach['mdp_coach'])) {
+            session_start();
+            $_SESSION['coach_id'] = $coach['id_coach'];
+            header('Location: dashboard_coach.php');
+            exit;
+        } else {
+            $message = 'Mauvais identifiants.';
+        }
     } else {
-        $message = 'Mauvais identifiants';
+        $message = 'Veuillez remplir tous les champs.';
     }
 }
-
-//Admin
-
-//Coach
-
 ?>
-
-
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -111,23 +151,13 @@ if (isset($_POST['courriel_client']) && isset($_POST['mdp_client'])) {
 
         <form action="login.php" method="post">
             <div>
-                <label for="nom_client">Nom:</label>
-                <input type="text" id="nom_client" name="nom_client">
-            </div>
-
-            <div>
-                <label for="prenom_client">Prénom:</label>
-                <input type="text" id="prenom_client" name="prenom_client">
-            </div>
-
-            <div>
                 <label for="courriel_client">Email:</label>
-                <input type="text" id="courriel_client" name="courriel_client">
+                <input type="text" id="courriel_client" name="courriel_client" required>
             </div>
 
             <div>
                 <label for="mdp_client">Mot de passe:</label>
-                <input type="text" id="mdp_client" name="mdp_client">
+                <input type="password" id="mdp_client" name="mdp_client" required>
             </div>
 
             <div>
@@ -144,13 +174,13 @@ if (isset($_POST['courriel_client']) && isset($_POST['mdp_client'])) {
 
         <form action="login.php" method="post">
             <div>
-                <label for="admin-username">Nom d'utilisateur:</label>
-                <input type="text" id="admin-username" name="username">
+                <label for="courriel_admin">Adresse e-mail:</label>
+                <input type="text" id="courriel_admin" name="courriel_admin" required>
             </div>
 
             <div>
-                <label for="admin-password">Mot de passe:</label>
-                <input type="password" id="admin-password" name="password">
+                <label for="mdp_admin">Mot de passe:</label>
+                <input type="password" id="mdp_admin" name="mdp_admin" required>
             </div>
 
             <div>
@@ -167,15 +197,13 @@ if (isset($_POST['courriel_client']) && isset($_POST['mdp_client'])) {
 
         <form action="login.php" method="post">
             <div>
-                <label for="coach-username">Nom d'utilisateur:</label>
-                <input type="text" id="coach-username" name="username">
+                <label for="courriel_coach">Adresse e-mail:</label>
+                <input type="text" id="courriel_coach" name="courriel_coach" required>
             </div>
-
             <div>
-                <label for="coach-password">Mot de passe:</label>
-                <input type="password" id="coach-password" name="password">
+                <label for="mdp_coach">Mot de passe:</label>
+                <input type="password" id="mdp_coach" name="mdp_coach" required>
             </div>
-
             <div>
                 <input type="submit" value="Se connecter">
             </div>
