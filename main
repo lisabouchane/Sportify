@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <title>Sportify: Consultation Sportive</title>
- <!-- CSS -->
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -21,7 +20,7 @@
         header {
             text-align: center;
             padding: 20px;
-            border-bottom: 2px solid #000;
+            border-bottom: 2px solid #ccc;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -33,7 +32,7 @@
         }
 
         .highlight {
-            color: red;
+            color: black;
             font-weight: bold;
         }
 
@@ -44,24 +43,47 @@
 
         nav a {
             display: inline-block;
-            background-color: #e0e0e0;
+            background-color: #ccc;
             border: 2px solid #555;
             padding: 10px 20px;
             margin: 0 5px;
             text-decoration: none;
             border-radius: 10px;
-            color: #000;
+            color: #D12424;
         }
 
         nav a:hover {
-            background-color: #d0d0d0;
+            background-color: #ccc;
+        }
+
+        .sub-menu {
+            display: none;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .sub-menu a {
+            display: inline-block;
+            background-color: #ccc;
+            border: 1px solid #aaa;
+            padding: 8px 16px;
+            margin: 0 5px;
+            text-decoration: none;
+            border-radius: 8px;
+            color: #3366cc;
+            text-align: center;
+        }
+
+        .sub-menu a:hover {
+            background-color: #e0e0e0;
+            text-align: center;
         }
 
         section {
             text-align: center;
             padding: 50px;
             font-size: 24px;
-            color: #000;
+            color: black;
             border: 2px solid #ddd;
             margin-bottom: 20px;
         }
@@ -70,61 +92,51 @@
             text-align: center;
             padding: 10px;
             border-top: 2px solid #000;
-            color: #000;
+            color: #3366cc;
         }
-        #carrousel { 
-        position: relative; 
-        height: 200px; 
-        width: 700px; 
-        margin: auto; 
-        } 
-        
-        #carrousel ul li{ 
-        position: absolute; 
-        top: 0; 
-        left: 0; 
-        } 
-        
-        .controls {
-            position:absolute;
-            top: 420px;
-            width: 100%;
-            display :flex;
-            justify-content: space-between;
+
+        #carrousel {
+            position: relative;
+            width: 700px;
+            margin: auto;
+            text-align: center; 
         }
-        
-        
-        .thumbnails {
-            margin-top: 300px;
+
+        #carrousel ul li{
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        h1 {
             text-align: center;
+            color: white;
+            background-color: #F5A510;
         }
-        
-        .thumbnails img {
-            width: 50px;
-            height: auto;
-            margin: 0 5px;
-            cursor: pointer;
+
+        .controls{
+            position: absolute;
+            top: 420px; 
+            width: 100%;
+            display: flex;
+            justify-content: center; 
         }
-        
-        .thumbnails img.active {
-            border: 2px solid #6495ED;
-        }
-        
-        
+
         .prev, .next{
-            cursor:pointer;
-            padding:10px;
-            background: #6495ED;
-            color: #FFFFFF;
-            border:none;
-            border-radius:5px;
-            margin: 0 5px;
+            cursor: pointer;
+            padding: 10px 20px; 
+            background: #F5A510; 
+            color: white;
+            border: none;
+            border-radius: 5px;
+            margin: 0 5px; 
         }
-        
-        h3 {text-align: center; 
-        color: #FFFFFF; 
-        background-color:#6495ED;
+
+        .prev:hover, .next:hover{
+            background: #F5A510; 
         }
+
+
     </style>
 </head>
 <body>
@@ -132,7 +144,7 @@
         <header>
             <div class="header-content">
                 <h1><span class="highlight">Sportify:</span> Consultation Sportive</h1>
-                <img src="sportify.jpg" alt="Sportify Logo" style="height: 50px;">
+                <img src="images/logo.png" alt="Sportify Logo" style="height: 50px;">
             </div>
         </header>
         <nav>
@@ -140,51 +152,25 @@
             <a href="#" id="tout-parcourir-btn">Tout Parcourir</a>
             <a href="#">Recherche</a>
             <a href="#">Rendez-vous</a>
-            <a href="index.html">Votre Compte</a>
+            <a href="#">Votre Compte</a>
         </nav>
         <div class="sub-menu" id="sub-menu">
             <a href="activité_sportive.html" id="activité_sportive-link">Activités sportives</a>
             <a href="sports_competition.html" id="sports-competition-link">Les Sports de compétition</a>
-            <a href="salle_omnes.html">Salle de sport Omnes</a>
+            <a href="#">Salle de sport Omnes</a>
         </div>
         <section>
             <h2>Accueil</h2>
-            <p>Il s'agit de la page principale (accueil | home) de Sportify. Dans cette page, on peut trouver quelques mots de bienvenue, introduisant Sportify, ainsi qu'une section de « L'Événement de la semaine » montrant au public une activité importante de la semaine (par exemple, porte ouverte de Sportify, un match de rugby entre Omnes Education vs. Visiteurs, une rencontre avec le coach et joueurs de tennis, etc.). C'est aussi possible qu'on trouve un carrousel des images des spécialistes des sports dans cette page. C'est également possible que la section « Événement de la semaine » soit remplacée par la section « Bulletin Sportif de la semaine » qui affiche des importantes nouvelles liées aux événements sportifs (par exemple, toutes les nouvelles sur une compétition sportive collégiale, une exhibition des jeux olympiques, etc.) de Sportify.</p>
-            <p>Finalement, dans la partie « footer » on peut trouver les coordonnées nécessaires pour contacter Sportify par mail, par téléphone ou par son adresse physique. C'est possible qu'il y ait un « Google Map » pour montrer l'adresse physique de Sportify.</p>
+            <h1>Bienvenue sur Sportify</h1>
+            <p>Sportify est la plateforme pour la consultation sportive de la communauté Omnes.Vous pourrez prendre rendez-vous avec le professionnel sportif de votre choix et accéder à l'intégralité de nos salles Omnes. </p>
+            <p>Cette semaine, ne manquez pas notre événement phare : un match de rugby entre l'ECE et Sup de Pub ! Venez nombreux pour soutenir votre équipe et rencontrer le coach et les joueurs de cette rencontre exceptionnelle.</p>
         </section>
-    <h3> Les coachs </h3> 
-    <div id="carrousel"> 
-        <ul> 
-            <li><img src="rugby.jpg" alt=" rugby" width="700" height="400" /></li>
-            <li><img src="football.jpg" alt="football" width="700" height="400" /></li>
-            <li><img src="boxe thai.jpg" alt=" boxe thai" width="700" height="400" /></li>
-            <li><img src="natation.jpg" alt="natation" width="700" height="400" /></li>
-            <li><img src="plongeon.jpg" alt="plongeon" width="700" height="400" /></li>
-            <li><img src="tennis.jpg" alt=" tennis" width="700" height="400" /></li>
-            <li><img src="basket.jpg" alt="basket" width="700" height="400" /></li>
-            <li><img src="Triathlon.jpg" alt="triathlon" width="700" height="400" /></li>
-        </ul>
-    </div> 
-
-    <div class="thumbnails">
-        <img src="rugby.jpg" alt="Thumbnail 1" width="100" height="60" />
-        <img src="football.jpg"  alt="Thumbnail 2" width="100" height="60" />
-        <img src="boxe thai.jpg" alt="Thumbnail 3" width="100" height="60" />
-        <img src="natation.jpg" alt="Thumbnail 4" width="100" height="60" />
-        <img src="plongeon.jpg" alt="Thumbnail 5" width="100" height="60" />
-        <img src="tennis.jpg" alt="Thumbnail 6" width="100" height="60" />
-        <img src="basket.jpg" alt="Thumbnail 7" width="100" height="60" />
-        <img src="Triathlon.jpg" alt="Thumbnail 7" width="100" height="60" />
-    </div>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script> 
-    <script src="java.js"></script>
-
         <footer>
             &copy; 2024 | Sportify
         </footer>
     </div>
-<script>
+
+    <script>
         document.getElementById('tout-parcourir-btn').addEventListener('click', function(event) {
             event.preventDefault();
             var subMenu = document.getElementById('sub-menu');
@@ -197,5 +183,79 @@
 
      
     </script>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+    var $carrousel = $('#carrousel');
+    var $img = $('#carrousel img');
+    var indexImg = $img.length - 1;
+    var i = 0;
+    var $currentImg = $img.eq(i);
+    $img.css('display', 'none');
+    $currentImg.css('display', 'block');
+    $carrousel.append('<div class="controls"><span class="prev">Precedent</span><span class="next">Suivant</span></div>');
+    
+    $('.next').click(function(){ // image suivante
+        i++;
+        if (i <= indexImg){
+            $img.css('display', 'none');
+            $currentImg = $img.eq(i);
+            $currentImg.css('display', 'block');
+        }
+        else{
+            i = indexImg;
+        }
+    });
+    
+    $('.prev').click(function(){ 
+        i--;
+        if (i >= 0){
+            $img.css('display', 'none');
+            $currentImg = $img.eq(i);
+            $currentImg.css('display', 'block');
+        }
+        else{
+            i = 0;
+        }
+    });
+
+    function slideImg() {
+        setTimeout(function(){
+            if (i < indexImg){
+                i++;
+            } else {
+                i = 0;
+            }
+            $img.css('display', 'none');
+            $currentImg = $img.eq(i);
+            $currentImg.css('display', 'block');
+            slideImg();
+        }, 4000);
+    }
+    
+    slideImg();
+});
+</script>
+</head>
+<body>
+<h1>Nos spécialistes des sports  &#128508;</h1>
+<div id="carrousel">
+<ul>
+   <li><img src="plongeon.jpg" width="700" height="400" /></li>
+   <li><img src="natation.jpg" width="700" height="400" /></li>
+   <li><img src="basket.jpg" width="600" height="400" /></li>
+   <li><img src="rugby.jpg" width="600" height="400" /></li>
+   <li><img src="football.jpg" width="600" height="400" /></li>
+   <li><img src="tennis.jpg" width="600" height="400" /></li>
+   <li><img src="axel.jpg" width="600" height="400" /></li>
+   <li><img src="lisa.jpg" width="400" height="400" /></li>
+   <li><img src="melinda.jpg" width="600" height="400" /></li>
+   <li><img src="alexiane.jpg" width="500" height="400" /></li>
+
+
+</ul>
+<div class="controls"><span class="prev">Précédent</span><span class="next">Suivant</span></div>
+</div> 
 </body>
 </html>
