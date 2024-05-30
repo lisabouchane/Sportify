@@ -19,6 +19,12 @@
             font-size: 24px;
             font-weight: bold;
         }
+        footer {
+            background-color: orange;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+        }
 
         .menu {
             background-color: #333;
@@ -282,6 +288,9 @@
             <p>Appel vocal en cours...</p>
         </div>
     </div>
+    <footer>
+        <p>&copy; 2024 Sportify Omnes. Tous droits réservés.</p>
+    </footer>
 
     <div class="video-call-box" id="video-call-box">
         <div class="video-call-header">
