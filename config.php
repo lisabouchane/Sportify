@@ -1,5 +1,4 @@
 <?php
-session_start();
 
 
 //site internet : https://www.xarala.co/blog/guide-complet-systeme-dauthentification-avec-php-et-mysql/
