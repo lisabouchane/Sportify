@@ -1,0 +1,40 @@
+#carrousel {
+    position: relative;
+    width: 700px;
+    margin: auto;
+    text-align: center; 
+}
+
+#carrousel ul li{
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+h1 {
+    text-align: center;
+    color: white;
+    background-color: #F5A510;
+}
+
+.controls{
+    position: absolute;
+    top: 420px; 
+    width: 100%;
+    display: flex;
+    justify-content: center; 
+}
+
+.prev, .next{
+    cursor: pointer;
+    padding: 10px 20px; 
+    background: #F5A510; 
+    color: white;
+    border: none;
+    border-radius: 5px;
+    margin: 0 5px; 
+}
+
+.prev:hover, .next:hover{
+    background: #F5A510; 
+}
