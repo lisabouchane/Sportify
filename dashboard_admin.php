@@ -21,6 +21,10 @@ if (!$admin) {
     echo "Aucun administrateur trouvé.";
     exit;
 }
+
+// Récupérer la liste des coachs avec leurs informations supplémentaires
+$stmt_coachs = $pdo->query("SELECT * FROM coachs");
+$coachs = $stmt_coachs->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <!DOCTYPE html>
@@ -50,6 +54,19 @@ if (!$admin) {
         p {
             color: #555;
         }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
         a {
             color: #007BFF;
             text-decoration: none;
@@ -66,7 +83,43 @@ if (!$admin) {
     <p>Voici vos informations :</p>
     <p><strong>Courriel :</strong> <?php echo htmlspecialchars($admin['courriel_admin']); ?></p>
 
-    <!-- Ajoutez ici d'autres éléments spécifiques à l'administration si nécessaire -->
+    <h3>Rajouter un Coach</h3>
+    <!-- Bouton pour rediriger vers register_coach.php -->
+    <a href="register_coach.php">Ajouter un nouveau coach</a>
+
+    <h3>Gérer les Coachs</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>Spécialité</th>
+                <th>Photos</th>
+                <th>Vidéo</th>
+                <th>CV</th>
+                <th>Disponibilité</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($coachs as $coach): ?>
+                <tr>
+                    <td><?= htmlspecialchars($coach['id_coach']) ?></td>
+                    <td><?= htmlspecialchars($coach['nom_coach']) ?></td>
+                    <td><?= htmlspecialchars($coach['prenom_coach']) ?></td>
+                    <td><?= htmlspecialchars($coach['specialite_coach']) ?></td>
+                    <td><!-- Afficher les photos --></td>
+                    <td><!-- Afficher la vidéo --></td>
+                    <td><!-- Afficher le CV --></td>
+                    <td><?= htmlspecialchars($coach['disponibilite_coach']) ?></td>
+                    <td>
+                        <a href="delete_coach.php?id_coach=<?= $coach['id_coach'] ?>" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce coach ?');">Supprimer</a>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
 
     <a href="logout.php">Se déconnecter</a>
 </div>
