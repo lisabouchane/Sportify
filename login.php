@@ -49,28 +49,28 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $message = 'Mauvais identifiants.';
         }
     }
-    // Coachs
-    elseif (isset($_POST['courriel_coach']) && isset($_POST['mdp_coach'])) {
-        $courriel_coach = $_POST['courriel_coach'];
-        $mdp_coach = $_POST['mdp_coach'];
+   // Coachs
+elseif (isset($_POST['courriel_coach']) && isset($_POST['mdp_coach'])) {
+    $courriel_coach = $_POST['courriel_coach'];
+    $mdp_coach = $_POST['mdp_coach'];
 
-        $sql = "SELECT * FROM coachs WHERE courriel_coach = :courriel_coach";
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute(['courriel_coach' => $courriel_coach]);
-        $coach = $stmt->fetch();
+    $sql = "SELECT * FROM coachs WHERE courriel_coach = :courriel_coach";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute(['courriel_coach' => $courriel_coach]);
+    $coach = $stmt->fetch();
 
-        if ($coach && password_verify($mdp_coach, $coach['mdp_coach'])) {
-            session_start();
-            $_SESSION['coach_id'] = $coach['id_coach'];
-            header('Location: dashboard_coach.php');
-            exit;
-        } else {
-            $message = 'Mauvais identifiants.';
-        }
+    if ($coach && password_verify($mdp_coach, $coach['mdp_coach'])) {
+        session_start();
+        $_SESSION['user_id'] = $coach['id_coach']; // Change to user_id for consistency
+        header('Location: dashboard_coach.php');
+        exit;
     } else {
-        $message = 'Veuillez remplir tous les champs.';
+        $message = 'Mauvais identifiants.';
     }
 }
+}
+
+
 ?>
 
 <!DOCTYPE html>
