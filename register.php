@@ -1,9 +1,35 @@
+<?php
+session_start();
+
+// Vérifier si l'utilisateur est connecté
+if (!isset($_SESSION['user_id'])) {
+    header('Location: login.php');
+    exit;
+}
+
+// Inclure le fichier de configuration pour la connexion à la base de données
+include('config.php');
+
+// Récupérer les informations du coach/personnel de sport
+$user_id = $_SESSION['user_id'];
+$sql = "SELECT nom_coach, prenom_coach, courriel_coach FROM coachs WHERE id_coach = :id_coach";
+$stmt = $pdo->prepare($sql);
+$stmt->execute(['id_coach' => $user_id]);
+$user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+if (!$user) {
+    echo "Aucun coach trouvé.";
+    exit;
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Choix du type d'utilisateur</title>
+    <title>Votre compte Sportify</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -11,99 +37,64 @@
             margin: 0;
             padding: 0;
         }
-
-        .login-container {
-            max-width: 400px;
-            margin: 100px auto;
+        .dashboard-container {
+            max-width: 800px;
+            margin: 50px auto;
             background-color: #fff;
             padding: 20px 30px;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
             border-radius: 8px;
         }
-
         h2 {
-            margin-top: 0;
             color: #333;
         }
-
-        label {
-            display: block;
-            margin-bottom: 8px;
+        p {
             color: #555;
         }
-
-        select {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            font-size: 16px;
+        a {
+            color: #007BFF;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .chatroom-link {
+        display: inline-block;
+        padding: 10px 20px;
+        font-size: 16px;
+        color: #fff;
+        background-color: #007BFF;
+        text-align: center;
+        text-decoration: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s;
         }
 
-        input[type="submit"] {
-            background-color: #007BFF;
-            color: #fff;
-            border: none;
-            padding: 10px 20px;
-            font-size: 16px;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        input[type="submit"]:hover {
+        .chatroom-link:hover {
             background-color: #0056b3;
         }
 
-        p {
-            color: red;
-            font-weight: bold;
-        }
     </style>
 </head>
 <body>
 
-<div class="login-container">
-    <h2>Choisissez votre type d'utilisateur</h2>
+<div class="dashboard-container">
+    <h2>Bienvenue sur votre tableau de bord, <?php echo htmlspecialchars($user['prenom_coach']); ?> <?php echo htmlspecialchars($user['nom_coach']); ?>!</h2>
+    <p>Voici vos informations :</p>
+    <p><strong>Courriel :</strong> <?php echo htmlspecialchars($user['courriel_coach']); ?></p>
 
-    <form action="register.php" method="post">
-        <div>
-            <label for="user_type">Type d'utilisateur:</label>
-            <select id="user_type" name="user_type" required>
-                <option value="client">Client</option>
-                <option value="admin">Administrateur</option>
-            </select>
-        </div>
+     <!-- Affichage des consultations courantes ou à venir -->
+    <h3>Consultations à venir :</h3>
 
-        <div>
-            <input type="submit" value="Continuer">
-        </div>
-    </form>
+
+     <!-- Lien vers la chatroom -->
+    <a href="chatroom.php" class="chatroom-link">Accéder à la chatroom</a>
+
+    
+
+    <p><a href="logout.php">Se déconnecter</a></p>
 </div>
-
-<?php
-if (isset($_POST['user_type'])) {
-    $user_type = $_POST['user_type'];
-
-    switch ($user_type) {
-        case 'client':
-            header('Location: register_client.php');
-            break;
-        case 'admin':
-            header('Location: register_admin.php');
-            break;
-        case 'coach':
-            header('Location: register_coach.php');
-            break;
-        default:
-            echo "<p>Type d'utilisateur non valide.</p>";
-            exit;
-    }
-} else if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    echo "<p>Aucun type d'utilisateur sélectionné.</p>";
-}
-?>
 
 </body>
 </html>
