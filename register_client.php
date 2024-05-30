@@ -1,18 +1,27 @@
 <?php
-
 include("config.php");
 
 $message = '';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    if (isset($_POST['email']) && isset($_POST['username']) && isset($_POST['password'])) {
+    if (isset($_POST['email']) && isset($_POST['nom']) && isset($_POST['prenom']) && isset($_POST['password']) && isset($_POST['adresse']) && isset($_POST['carte_etudiante'])) {
         $email = $_POST['email'];
-        $username = $_POST['username'];
+        $nom = $_POST['nom'];
+        $prenom = $_POST['prenom'];
+        $adresse = $_POST['adresse'];
+        $carte_etudiante = $_POST['carte_etudiante'];
         $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
-        $sql = "INSERT INTO clients (courriel_client, nom_client, mdp_client) VALUES (:email, :username, :password)";
+        $sql = "INSERT INTO clients (courriel_client, nom_client, prenom_client, adresse_client, mdp_client, carte_etudiante_client) VALUES (:email, :nom, :prenom, :adresse, :password, :carte_etudiante)";
         $stmt = $pdo->prepare($sql);
-        $result = $stmt->execute(['email' => $email, 'username' => $username, 'password' => $password]);
+        $result = $stmt->execute([
+            'email' => $email,
+            'nom' => $nom,
+            'prenom' => $prenom,
+            'adresse' => $adresse,
+            'password' => $password,
+            'carte_etudiante' => $carte_etudiante
+        ]);
 
         if ($result) {
             $message = 'Inscription réussie!';
@@ -26,7 +35,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -108,15 +116,25 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <input type="email" id="email" name="email" required>
         </div>
         <div>
-            <label for="username">Nom d'utilisateur:</label>
-            <input type="text" id="username" name="username" required>
+            <label for="nom">Nom:</label>
+            <input type="text" id="nom" name="nom" required>
         </div>
-
+        <div>
+            <label for="prenom">Prénom:</label>
+            <input type="text" id="prenom" name="prenom" required>
+        </div>
+        <div>
+            <label for="adresse">Adresse:</label>
+            <input type="text" id="adresse" name="adresse" required>
+        </div>
+        <div>
+            <label for="carte_etudiante">Carte Étudiante:</label>
+            <input type="text" id="carte_etudiante" name="carte_etudiante" required>
+        </div>
         <div>
             <label for="password">Mot de passe:</label>
             <input type="password" id="password" name="password" required>
         </div>
-
         <div>
             <input type="submit" value="S'inscrire">
         </div>
