@@ -49,18 +49,21 @@ admin : CREATE TABLE administrateurs (
 
 *****************************************************
 
-paiement : CREATE TABLE paiement (
-    id_paiement INT(11) NOT NULL AUTO_INCREMENT,
-    id_client INT(11) NOT NULL,
-    type_carte VARCHAR(50) NOT NULL,
-    numero_carte VARCHAR(20) NOT NULL,
-    nom_carte VARCHAR(255) NOT NULL,
-    date_expiration DATE NOT NULL,
-    cvv INT(3) NOT NULL,
-    PRIMARY KEY (id_paiement),
-    UNIQUE KEY (id_client),
-    FOREIGN KEY (id_client) REFERENCES clients(id_client) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+-- Structure de la table `paiement`
+--
+
+CREATE TABLE IF NOT EXISTS `paiement` (
+  `id_paiement` int(11) NOT NULL AUTO_INCREMENT,
+  `id_client` int(11) NOT NULL,
+  `type_carte` varchar(50) NOT NULL,
+  `numero_carte` varchar(20) NOT NULL,
+  `nom_carte` varchar(255) NOT NULL,
+  `date_expiration` text NOT NULL,
+  `cvv` int(4) NOT NULL,
+  PRIMARY KEY (`id_paiement`),
+  UNIQUE KEY `id_client` (`id_client`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+
 *****************************************************
 
 rendez_vous : CREATE TABLE rendez_vous (
