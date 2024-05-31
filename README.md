@@ -3,7 +3,7 @@ Pour base de données (connexion Client/Admin/Coach) :
 
 ** ce que vous devez mettre dans votre sql : **
 
-*****************************************************
+
 
 CREATE TABLE IF NOT EXISTS `clients` (
   `id_client` int(11) NOT NULL AUTO_INCREMENT,
@@ -22,7 +22,7 @@ CREATE TABLE IF NOT EXISTS `clients` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 
-*****************************************************
+
 
 CREATE TABLE IF NOT EXISTS `coachs` (
   `id_coach` int(11) NOT NULL AUTO_INCREMENT,
@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS `coachs` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 
-*****************************************************
+
 
 CREATE TABLE IF NOT EXISTS `administrateurs` (
   `id_admin` int(11) NOT NULL AUTO_INCREMENT,
@@ -51,10 +51,7 @@ CREATE TABLE IF NOT EXISTS `administrateurs` (
   UNIQUE KEY `courriel` (`courriel_admin`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
-*****************************************************
 
--- Structure de la table `paiement`
---
 
 CREATE TABLE IF NOT EXISTS `paiement` (
   `id_paiement` int(11) NOT NULL AUTO_INCREMENT,
@@ -68,22 +65,13 @@ CREATE TABLE IF NOT EXISTS `paiement` (
   UNIQUE KEY `id_client` (`id_client`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
---
--- Contenu de la table `paiement`
---
 
-INSERT INTO `paiement` (`id_paiement`, `id_client`, `type_carte`, `numero_carte`, `nom_carte`, `date_expiration`, `cvv`) VALUES
-(1, 1, 'Visa', '762852884', 'BEC Melinda', '0', 6),
-(2, 3, 'Visa', '98729875', 'BEC LÃ©a', '0', 7),
-(3, 6, 'Visa', '6747635467980909', 'Thoumyre Axel', '0', 656);
 
--- Contraintes pour la table `paiement`
---
+
 ALTER TABLE `paiement`
   ADD CONSTRAINT `paiement_ibfk_1` FOREIGN KEY (`id_client`) REFERENCES `clients` (`id_client`) ON DELETE CASCADE;
 
 
-*****************************************************
 
 CREATE TABLE IF NOT EXISTS `rendez_vous` (
   `id_r` int(11) NOT NULL AUTO_INCREMENT,
@@ -97,12 +85,10 @@ CREATE TABLE IF NOT EXISTS `rendez_vous` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 
--- Contraintes pour la table `rendez_vous`
---
+
 ALTER TABLE `rendez_vous`
   ADD CONSTRAINT `rendez_vous_ibfk_1` FOREIGN KEY (`client_id`) REFERENCES `clients` (`id_client`),
   ADD CONSTRAINT `rendez_vous_ibfk_2` FOREIGN KEY (`coach_id`) REFERENCES `coachs` (`id_coach`);
 
 
-*****************************************************
 
