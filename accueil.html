@@ -10,26 +10,39 @@
             padding: 0;
         }
 
-        .wrapper {
-            border: 1px solid #ccc;
-            max-width: 100%;
-            margin: 20px auto;
-            padding: 10px;
+        footer {
+            background-color: orange;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
         }
 
         header {
+            background-color: #F5A510;
+            color: white;
+            /*padding: 50px 0;*/
+            padding-top: 100px;
+            padding-bottom: 20px;
             text-align: center;
-            padding: 20px;
-            border-bottom: 2px solid #ccc;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            font-size: 24px;
+            font-weight: bold;
+            margin: -20px;
+
         }
 
         .header-content h1 {
             margin: 0;
             font-size: 24px;
         }
+
+        .wrapper {
+            border: 0px solid #ccc;
+            max-width: 100%;
+            margin: 0px auto;
+            padding: 10px;
+            background-color: #333;
+        }
+
 
         .highlight {
             color: black;
@@ -43,17 +56,19 @@
 
         nav a {
             display: inline-block;
-            background-color: #ccc;
+            background-color: orange;
             border: 2px solid #555;
             padding: 10px 20px;
             margin: 0 5px;
             text-decoration: none;
             border-radius: 10px;
-            color: #D12424;
+            color: white;
         }
 
         nav a:hover {
-            background-color: #ccc;
+            background-color: white;
+            color: #333;
+
         }
 
         .sub-menu {
@@ -64,36 +79,35 @@
 
         .sub-menu a {
             display: inline-block;
-            background-color: #ccc;
-            border: 1px solid #aaa;
+            background-color: #333;
+            border: 1px solid orange;
             padding: 8px 16px;
-            margin: 0 5px;
+            margin: 5px;
             text-decoration: none;
             border-radius: 8px;
-            color: #3366cc;
+            color: orange;
             text-align: center;
         }
 
         .sub-menu a:hover {
             background-color: #e0e0e0;
+            border: #333;
             text-align: center;
+            color: #333;
         }
 
         section {
             text-align: center;
-            padding: 50px;
+            padding: 0px;
             font-size: 24px;
-            color: black;
-            border: 2px solid #ddd;
-            margin-bottom: 20px;
+            color: white;
+            border-bottom: 1px solid #ddd;
+            margin-bottom: 0px;
+            margin-top: -20px;
+            background-color: #333;
+
         }
 
-        footer {
-            text-align: center;
-            padding: 10px;
-            border-top: 2px solid #000;
-            color: #3366cc;
-        }
 
         h1 {
             text-align: center;
@@ -120,52 +134,52 @@
         }
 
         .prev:hover, .next:hover{
-            background: #F5A510; 
+            background: #333; 
         }
 
         .c-item {
           height: 480px;
+          background-color: #333;
         }
 
         .c-img {
           height: 100%;
           object-fit: cover;
           filter: brightness(0.6);
+        background-color: #333;
         }
 
-        
-
         .map-container {
+            background-color: #333;
           width: 100%;
           height: 400px;
-          border: 1px solid #ccc;
+          border: 0px solid #ccc;
             max-width: 960px;
             margin: 20px auto;
             padding: 10px;
-      }
+        }
 
     </style>
 </head>
 <body>
-    <div class="wrapper">
-        <header>
-            <div class="header-content">
-                <h1><span class="highlight">Sportify:</span> Consultation Sportive</h1>
-                <img src="sportify.jpg" alt="Sportify Logo" style="height: 50px;">
-                      <nav>
-            <a href="#">Accueil</a>
+
+    <header><span style="font-size: 42px;">Sportify</span> 
+        <br><br><br> 
+    </header>
+    <div class = "wrapper">
+        <nav>
+            <a href="accueil.html">Accueil</a>
             <a href="#" id="tout-parcourir-btn">Tout Parcourir</a>
-            <a href="recherche.php">Recherche</a>
+            <a href="#">Recherche</a>
             <a href="#">Rendez-vous</a>
-            <a href="index.html">Votre Compte</a>
+            <a href="#">Votre Compte</a>
         </nav>
         <div class="sub-menu" id="sub-menu">
             <a href="activité_sportive.html" id="activité_sportive-link">Activités sportives</a>
             <a href="sports_competition.html" id="sports-competition-link">Les Sports de compétition</a>
             <a href="salle_omnes.html" id="salle-de-sport-link">Salle de sport Omnes</a>
         </div>
-            </div>
-        </header>
+    </div>
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -242,6 +256,7 @@
     </button>
   </div>
 
+<br><br>
         <section>
             <p>Sportify est la plateforme pour la consultation sportive de la communauté Omnes.</p>
             <p>Cette semaine, ne manquez pas notre événement phare : un match de rugby entre l'ECE et Sup de Pub ! Venez nombreux pour soutenir votre équipe et rencontrer le coach et les joueurs de cette rencontre exceptionnelle.</p>
@@ -259,7 +274,10 @@
         </iframe>
     </div>
     <footer>
-        &copy; 2024 | Sportify
+        &copy; 2024 | Sportify <br>
+        16 rue Sextius Michel, 75015 <br>
+        sportify.coach@gmail.com <br>
+        06 65 94 50 92 <br>
     </footer>
 
     <script>
@@ -346,7 +364,6 @@
                 slideImg();
             }, 4000);
         }
-        
         slideImg();
     });
     </script>
