@@ -5,47 +5,51 @@ Pour base de données (connexion Client/Admin/Coach) :
 
 *****************************************************
 
-clients : CREATE TABLE clients (
-    id_client INT(11) NOT NULL AUTO_INCREMENT,
-    nom_client VARCHAR(255) COLLATE latin1_swedish_ci NULL,
-    prenom_client VARCHAR(255) COLLATE latin1_swedish_ci NULL,
-    adresse_client TEXT COLLATE latin1_swedish_ci NULL,
-    ville_client VARCHAR(255) COLLATE latin1_swedish_ci NULL,
-    code_postal_client VARCHAR(20) COLLATE latin1_swedish_ci NULL,
-    pays_client VARCHAR(100) COLLATE latin1_swedish_ci NULL,
-    telephone_client VARCHAR(20) COLLATE latin1_swedish_ci NULL,
-    courriel_client VARCHAR(255) COLLATE latin1_swedish_ci NULL,
-    mdp_client VARCHAR(255) COLLATE latin1_swedish_ci NULL,
-    carte_etudiante_client VARCHAR(255) COLLATE latin1_swedish_ci NULL,
-    PRIMARY KEY (id_client)
-);
-
-*****************************************************
-
-coachs : CREATE TABLE coachs (
-    id_coach INT(11) NOT NULL AUTO_INCREMENT,
-    nom_coach VARCHAR(255) COLLATE latin1_swedish_ci NULL,
-    prenom_coach VARCHAR(255) COLLATE latin1_swedish_ci NULL,
-    photos_coach VARCHAR(255) COLLATE latin1_swedish_ci NULL,
-    specialite_coach VARCHAR(255) COLLATE latin1_swedish_ci NULL,
-    cv_coach TEXT COLLATE latin1_swedish_ci NULL,
-    disponibilite_coach TEXT COLLATE latin1_swedish_ci NULL,
-    courriel_coach VARCHAR(255) COLLATE latin1_swedish_ci NULL,
-    mdp_coach VARCHAR(255) COLLATE latin1_swedish_ci NULL,
-    PRIMARY KEY (id_coach)
-);
+CREATE TABLE IF NOT EXISTS `clients` (
+  `id_client` int(11) NOT NULL AUTO_INCREMENT,
+  `nom_client` varchar(255) DEFAULT NULL,
+  `prenom_client` varchar(255) DEFAULT NULL,
+  `adresse_client` text,
+  `ville_client` varchar(255) DEFAULT NULL,
+  `code_postal_client` varchar(20) DEFAULT NULL,
+  `pays_client` varchar(100) DEFAULT NULL,
+  `telephone_client` varchar(20) DEFAULT NULL,
+  `courriel_client` varchar(255) DEFAULT NULL,
+  `mdp_client` varchar(255) DEFAULT NULL,
+  `carte_etudiante_client` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id_client`),
+  UNIQUE KEY `courriel` (`courriel_client`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 
 *****************************************************
 
-admin : CREATE TABLE administrateurs (
-    id_admin INT(11) NOT NULL AUTO_INCREMENT,
-    nom_admin VARCHAR(255) COLLATE latin1_swedish_ci NULL,
-    prenom_admin VARCHAR(255) COLLATE latin1_swedish_ci NULL,
-    courriel_admin VARCHAR(255) COLLATE latin1_swedish_ci NULL,
-    mdp_admin VARCHAR(255) COLLATE latin1_swedish_ci NULL,
-    PRIMARY KEY (id_admin)
-);
+CREATE TABLE IF NOT EXISTS `coachs` (
+  `id_coach` int(11) NOT NULL AUTO_INCREMENT,
+  `nom_coach` varchar(255) DEFAULT NULL,
+  `prenom_coach` varchar(255) DEFAULT NULL,
+  `photo_coach` varchar(255) DEFAULT NULL,
+  `specialite_coach` varchar(255) DEFAULT NULL,
+  `cv_coach` text,
+  `disponibilite_coach` text,
+  `courriel_coach` varchar(255) DEFAULT NULL,
+  `mdp_coach` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id_coach`),
+  UNIQUE KEY `courriel` (`courriel_coach`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+
+
+*****************************************************
+
+CREATE TABLE IF NOT EXISTS `administrateurs` (
+  `id_admin` int(11) NOT NULL AUTO_INCREMENT,
+  `nom_admin` varchar(255) DEFAULT NULL,
+  `prenom_admin` varchar(255) DEFAULT NULL,
+  `courriel_admin` varchar(255) DEFAULT NULL,
+  `mdp_admin` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id_admin`),
+  UNIQUE KEY `courriel` (`courriel_admin`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 *****************************************************
 
@@ -64,20 +68,41 @@ CREATE TABLE IF NOT EXISTS `paiement` (
   UNIQUE KEY `id_client` (`id_client`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
+--
+-- Contenu de la table `paiement`
+--
+
+INSERT INTO `paiement` (`id_paiement`, `id_client`, `type_carte`, `numero_carte`, `nom_carte`, `date_expiration`, `cvv`) VALUES
+(1, 1, 'Visa', '762852884', 'BEC Melinda', '0', 6),
+(2, 3, 'Visa', '98729875', 'BEC LÃ©a', '0', 7),
+(3, 6, 'Visa', '6747635467980909', 'Thoumyre Axel', '0', 656);
+
+-- Contraintes pour la table `paiement`
+--
+ALTER TABLE `paiement`
+  ADD CONSTRAINT `paiement_ibfk_1` FOREIGN KEY (`id_client`) REFERENCES `clients` (`id_client`) ON DELETE CASCADE;
+
+
 *****************************************************
 
-rendez_vous : CREATE TABLE rendez_vous (
-    id INT(11) NOT NULL AUTO_INCREMENT,
-    client_id INT(11) NULL,
-    coach_id INT(11) NULL,
-    date_heure DATETIME NULL,
-    status VARCHAR(50) COLLATE latin1_swedish_ci NULL,
-    PRIMARY KEY (id),
-    INDEX (client_id),
-    INDEX (coach_id),
-    INDEX (date_heure),
-    INDEX (status)
-);
+CREATE TABLE IF NOT EXISTS `rendez_vous` (
+  `id_r` int(11) NOT NULL AUTO_INCREMENT,
+  `client_id` int(11) DEFAULT NULL,
+  `coach_id` int(11) DEFAULT NULL,
+  `date_heure` datetime DEFAULT NULL,
+  `status` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id_r`),
+  KEY `client_id` (`client_id`),
+  KEY `coach_id` (`coach_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+
+-- Contraintes pour la table `rendez_vous`
+--
+ALTER TABLE `rendez_vous`
+  ADD CONSTRAINT `rendez_vous_ibfk_1` FOREIGN KEY (`client_id`) REFERENCES `clients` (`id_client`),
+  ADD CONSTRAINT `rendez_vous_ibfk_2` FOREIGN KEY (`coach_id`) REFERENCES `coachs` (`id_coach`);
+
 
 *****************************************************
 
