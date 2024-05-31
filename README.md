@@ -38,7 +38,7 @@ coachs : CREATE TABLE coachs (
 
 *****************************************************
 
-admin : CREATE TABLE admins (
+admin : CREATE TABLE administrateurs (
     id_admin INT(11) NOT NULL AUTO_INCREMENT,
     nom_admin VARCHAR(255) COLLATE latin1_swedish_ci NULL,
     prenom_admin VARCHAR(255) COLLATE latin1_swedish_ci NULL,
