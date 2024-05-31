@@ -1,16 +1,16 @@
 <?php
 session_start();
 
-// Vérifier si l'utilisateur est connecté
+// verifications
 if (!isset($_SESSION['user_id'])) {
     header('Location: login.php');
     exit;
 }
 
-// Inclure le fichier de configuration pour la connexion à la base de données
+
 include('config.php');
 
-// Récupérer les informations de l'utilisateur
+//récupérer les informations de l'utilisateur
 $user_id = $_SESSION['user_id'];
 $sql = "SELECT nom_client, prenom_client FROM clients WHERE id_client = :id_client";
 $stmt = $pdo->prepare($sql);
