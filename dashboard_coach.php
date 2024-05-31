@@ -1,16 +1,15 @@
 <?php
 session_start();
 
-// Vérifier si l'utilisateur est connecté
+//verifications
 if (!isset($_SESSION['user_id'])) {
     header('Location: login.php');
     exit;
 }
 
-// Inclure le fichier de configuration pour la connexion à la base de données
 include('config.php');
 
-// Récupérer les informations du coach/personnel de sport
+//information
 $user_id = $_SESSION['user_id'];
 $sql = "SELECT nom_coach, prenom_coach, courriel_coach FROM coachs WHERE id_coach = :id_coach";
 $stmt = $pdo->prepare($sql);
