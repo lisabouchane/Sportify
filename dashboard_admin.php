@@ -1,16 +1,17 @@
 <?php
 session_start();
 
-// Vérifier si l'utilisateur est connecté en tant qu'administrateur
+//vérifications
+//connexion : admin
 if (!isset($_SESSION['admin_id'])) {
     header('Location: login_admin.php');
     exit;
 }
 
-// Inclure le fichier de configuration pour la connexion à la base de données
+//inclure config
 include('config.php');
 
-// Récupérer les informations de l'administrateur
+// récupérations informations
 $admin_id = $_SESSION['admin_id'];
 $sql = "SELECT nom_admin, prenom_admin, courriel_admin FROM administrateurs WHERE id_admin = :id_admin";
 $stmt = $pdo->prepare($sql);
@@ -22,17 +23,19 @@ if (!$admin) {
     exit;
 }
 
-// Récupérer la liste des coachs avec leurs informations supplémentaires
+//liste coachs
 $stmt_coachs = $pdo->query("SELECT * FROM coachs");
 $coachs = $stmt_coachs->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
+
+<!--HTML-->
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tableau de bord de l'administrateur</title>
+    <title>Compte administrateur</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -84,7 +87,7 @@ $coachs = $stmt_coachs->fetchAll(PDO::FETCH_ASSOC);
     <p><strong>Courriel :</strong> <?php echo htmlspecialchars($admin['courriel_admin']); ?></p>
 
     <h3>Rajouter un Coach</h3>
-    <!-- Bouton pour rediriger vers register_coach.php -->
+    <!-- rediriger vers register_coach.php -->
     <a href="register_coach.php">Ajouter un nouveau coach</a>
 
     <h3>Gérer les Coachs</h3>
@@ -95,9 +98,7 @@ $coachs = $stmt_coachs->fetchAll(PDO::FETCH_ASSOC);
                 <th>Nom</th>
                 <th>Prénom</th>
                 <th>Spécialité</th>
-                <th>Photos</th>
-                <th>Vidéo</th>
-                <th>CV</th>
+                
                 <th>Disponibilité</th>
                 <th>Actions</th>
             </tr>
@@ -109,9 +110,7 @@ $coachs = $stmt_coachs->fetchAll(PDO::FETCH_ASSOC);
                     <td><?= htmlspecialchars($coach['nom_coach']) ?></td>
                     <td><?= htmlspecialchars($coach['prenom_coach']) ?></td>
                     <td><?= htmlspecialchars($coach['specialite_coach']) ?></td>
-                    <td><!-- Afficher les photos --></td>
-                    <td><!-- Afficher la vidéo --></td>
-                    <td><!-- Afficher le CV --></td>
+                    
                     <td><?= htmlspecialchars($coach['disponibilite_coach']) ?></td>
                     <td>
                         <a href="delete_coach.php?id_coach=<?= $coach['id_coach'] ?>" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce coach ?');">Supprimer</a>
