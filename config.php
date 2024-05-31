@@ -3,7 +3,7 @@
 
 //site internet : https://www.xarala.co/blog/guide-complet-systeme-dauthentification-avec-php-et-mysql/
 
-// Configuration de la base de données
+// configuration de la base de données
 $host = 'localhost';
 $db = 'sportify';
 $user = 'root';
