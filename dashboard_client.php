@@ -1,16 +1,16 @@
 <?php
 session_start();
 
-// Vérifier si l'utilisateur est connecté
+//vérifications
+//connexion : client
 if (!isset($_SESSION['user_id'])) {
     header('Location: login.php');
     exit;
 }
 
-// Inclure le fichier de configuration pour la connexion à la base de données
 include('config.php');
 
-// Récupérer les informations de l'utilisateur
+// informations 
 $user_id = $_SESSION['user_id'];
 $sql = "SELECT nom_client, prenom_client, adresse_client, courriel_client, carte_etudiante_client FROM clients WHERE id_client = :id_client";
 $stmt = $pdo->prepare($sql);
@@ -50,12 +50,20 @@ if (!$user) {
         p {
             color: #555;
         }
-        a {
-            color: #007BFF;
+        a, .button-link {
+            color: #fff;
             text-decoration: none;
+            padding: 10px 20px;
+            background-color: #007BFF;
+            border-radius: 4px;
+            display: inline-block;
+            transition: background-color 0.3s;
         }
-        a:hover {
-            text-decoration: underline;
+        a:hover, .button-link:hover {
+            background-color: #0056b3;
+        }
+        .button-link {
+            margin-top: 10px;
         }
     </style>
 </head>
@@ -67,26 +75,23 @@ if (!$user) {
     <p><strong>Adresse :</strong> <?php echo nl2br(htmlspecialchars($user['adresse_client'])); ?></p>
     <p><strong>Courriel :</strong> <?php echo htmlspecialchars($user['courriel_client']); ?></p>
     <p><strong>Carte étudiante :</strong> <?php echo htmlspecialchars($user['carte_etudiante_client']); ?></p>
-   
 
     <h3>Historique des consultations :</h3>
-    <!-- Vous pouvez ajouter les consultations ici -->
-    <!-- Exemple: -->
-    <!-- <p>Date/Heure: [Date/Heure] - Coach/Service: [Nom du coach/Service]</p> -->
-
-    <!-- Bouton pour annuler le RDV -->
+    
+    <!-- bouton pour annuler le RDV -->
     <p><button onclick="annulerRDV()">Annuler ce RDV</button></p>
 
-    <a href="payement.php">Payer pour un service</a><br>
+    <h3>Services</h3>
+    <p>Formule par mois : Payer 59.99 euros/mois pour avoir des rendez-vous illimités.</p>
+    <a href="payement.php"class="button-link">Je fonce !</a>
+
+    <p>Formule découverte : Payer 12.99 euros/mois pour avoir 5 rendez-vous en 2 semaines.</p>
+    <a href="payement.php" class="button-link">Je fonce vers la découverte!</a>
+    
     <a href="logout.php">Se déconnecter</a>
 </div>
 
-<script>
-function annulerRDV() {
-    // Logic for annulerRDV goes here
-    alert('Fonctionnalité à implémenter');
-}
-</script>
+
 
 </body>
 </html>
