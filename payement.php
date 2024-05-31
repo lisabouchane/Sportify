@@ -1,19 +1,19 @@
 <?php
 session_start();
 
-// Vérifier si l'utilisateur est connecté
+
 if (!isset($_SESSION['user_id'])) {
     header('Location: login.php');
     exit;
 }
 
-// Inclure le fichier de configuration pour la connexion à la base de données
 include('config.php');
 
 $message = '';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // Informations de l'utilisateur
+
+    // infos client
     $nom = $_POST['nom'];
     $prenom = $_POST['prenom'];
     $adresse_ligne1 = $_POST['adresse_ligne1'];
@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $telephone = $_POST['telephone'];
     $carte_etudiant = $_POST['carte_etudiant'];
 
-    // Informations de paiement
+    // infos paiement
     $card_type = $_POST['card_type'];
     $card_number = $_POST['card_number'];
     $card_name = $_POST['card_name'];
@@ -32,11 +32,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $cvv = $_POST['cvv'];
 
     if (!empty($nom) && !empty($prenom) && !empty($adresse_ligne1) && !empty($ville) && !empty($code_postal) && !empty($pays) && !empty($telephone) && !empty($carte_etudiant) && !empty($card_type) && !empty($card_number) && !empty($card_name) && !empty($expiry_date) && !empty($cvv)) {
-        // Simuler la validation de paiement
-        // Dans un vrai scénario, vous devez intégrer une API de paiement pour traiter le paiement
+        /
         $user_id = $_SESSION['user_id'];
         
-        // Mettre à jour les informations de l'utilisateur
+        // maj infos client
         $adresse = "$adresse_ligne1\n$adresse_ligne2";
         $sql = "UPDATE clients SET 
             nom_client = :nom,
@@ -62,7 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             'id_client' => $user_id
         ]);
 
-        // Insérer les informations de paiement dans la table paiement
+        // insersion dans la table
         $sql = "INSERT INTO paiement (id_client, type_carte, numero_carte, nom_carte, date_expiration, cvv) VALUES (:id_client, :card_type, :card_number, :card_name, :expiry_date, :cvv)";
         
         $stmt = $pdo->prepare($sql);
