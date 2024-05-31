@@ -11,6 +11,7 @@ include('config.php');
 if (isset($_GET['id_coach'])) {
     $id_coach = $_GET['id_coach'];
     
+    //bdd coachs
     $stmt = $pdo->prepare("DELETE FROM coachs WHERE id_coach = :id_coach");
     $stmt->execute(['id_coach' => $id_coach]);
     
