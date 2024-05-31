@@ -259,6 +259,56 @@
         .prev:hover, .next:hover{
             background: #333; 
         }
+
+        .sub-call b {
+            display: inline-block;
+            background-color: #333;
+            border: 1px solid orange;
+            padding: 8px 16px;
+            margin: 5px;
+            text-decoration: none;
+            border-radius: 8px;
+            color: orange;
+            text-align: center;
+        }
+
+        .sub-call b:hover {
+            background-color: #e0e0e0;
+            border: #333;
+            text-align: center;
+            color: #333;
+        }
+
+        .extra-buttons {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        .extra-buttons button {
+            margin-top: 10px;
+        }
+
+        .button-container2 button {
+            background-color: #333;
+            border: 2px solid orange;
+            border-radius: 5px;
+            color: orange;
+            font-size: 18px;
+            margin: 0 10px;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+
+        .button-container2 button:hover {
+            background-color: orange;
+            border-color: #999;
+            color: white;
+        }
+
+
     </style>
 </head>
 <body>
@@ -273,7 +323,7 @@
             <a href="#" id="tout-parcourir-btn">Tout Parcourir</a>
             <a href="recherche.php">Recherche</a>
             <a href="#">Rendez-vous</a>
-            <a href="index.html">Votre Compte</a>
+            <a href="#">Votre Compte</a>
         </nav>
         <div class="sub-menu" id="sub-menu">
             <a href="activité_sportive.html" id="activité_sportive-link">Activités sportives</a>
@@ -306,6 +356,7 @@
         <div class="coach-cv">
             <p>CV: <a href="cvbasket.pdf">Télécharger le CV</a></p>
             <p class="available">Disponible maintenant</p>
+
             <button class="chat-button">Envoyer un message</button>
             <button class="voice-call-button">Appel vocal</button>
             <button class="video-call-button">Appel vidéo</button>
@@ -326,7 +377,7 @@
 
     <div id="Rugby" class="coach-info">
         <h2>Rugby</h2>
-        <img src="rugby.jpg" alt="Coach Rugby">
+        <img src="vida.jpg" alt="Coach Rugby">
         <div class="coach-details">
             <p>Nom: Bruno BARRIER</p>
             <p>Bureau: B203</p>
@@ -402,7 +453,10 @@
         </div>
     </div>
     <footer>
-        <p>&copy; 2024 Sportify Omnes. Tous droits réservés.</p>
+        &copy; 2024 | Sportify <br>
+        16 rue Sextius Michel, 75015 <br>
+        sportify.coach@gmail.com <br>
+        06 65 94 50 92 <br>
     </footer>
 
     <div class="video-call-box" id="video-call-box">
