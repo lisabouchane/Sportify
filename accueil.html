@@ -20,14 +20,12 @@
         header {
             background-color: #F5A510;
             color: white;
-            /*padding: 50px 0;*/
             padding-top: 100px;
             padding-bottom: 20px;
             text-align: center;
             font-size: 24px;
             font-weight: bold;
             margin: -20px;
-
         }
 
         .header-content h1 {
@@ -42,7 +40,6 @@
             padding: 10px;
             background-color: #333;
         }
-
 
         .highlight {
             color: black;
@@ -68,7 +65,6 @@
         nav a:hover {
             background-color: white;
             color: #333;
-
         }
 
         .sub-menu {
@@ -105,9 +101,7 @@
             margin-bottom: -12px;
             margin-top: -50px;
             background-color: #333;
-
         }
-
 
         h1 {
             text-align: center;
@@ -115,7 +109,7 @@
             background-color: #F5A510;
         }
 
-        .controls{
+        .controls {
             position: absolute;
             top: 420px; 
             width: 100%;
@@ -123,7 +117,7 @@
             justify-content: center; 
         }
 
-        .prev, .next{
+        .prev, .next {
             cursor: pointer;
             padding: 10px 20px; 
             background: #F5A510; 
@@ -133,20 +127,20 @@
             margin: 0 5px; 
         }
 
-        .prev:hover, .next:hover{
+        .prev:hover, .next:hover {
             background: #333; 
         }
 
         .c-item {
-          height: 480px;
-          background-color: #333;
+            height: 480px;
+            background-color: #333;
         }
 
         .c-img {
-          height: 100%;
-          object-fit: cover;
-          filter: brightness(0.6);
-        background-color: #333;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.6);
+            background-color: #333;
         }
 
         .map-container {
@@ -154,12 +148,21 @@
             width: 100%;
             height: 400px;
             border: 0px solid #ccc;
-            /*max-width: 960px;*/
-            margin-top: 10px ;
-            margin-bottom: -70px ;
+            margin-top: 10px;
+            margin-bottom: -70px;
             padding: 50px;
+            text-align: center;
         }
 
+        .map-container p {
+            color: white;
+            font-weight: bold;
+            text-align: center;
+            background-color: orange;
+            display: inline-block;
+            padding: 10px;
+            border-radius: 5px;
+        }
 
         .outer-rectangle {
             margin-top: -5px;
@@ -198,8 +201,6 @@
             font-weight: bold;
             color: white;
         }
-
-
     </style>
 </head>
 <body>
@@ -314,8 +315,10 @@
         </div>
     </div>
     </section> 
+    <br></br>
 
     <div class="map-container">
+        <p>Nous retrouver :</p>
         <iframe 
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2624.5364824916036!2d2.2896013156759247!3d48.84883177928647!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e671c6b24f2cd7%3A0x6f98e5e56b1d39c3!2s10%20Rue%20Sextius%20Michel%2C%2075015%20Paris%2C%20France!5e0!3m2!1sen!2sus!4v1652874998836!5m2!1sen!2sus" 
             width="100%" 
@@ -323,8 +326,7 @@
             style="border:0;" 
             allowfullscreen="" 
             loading="lazy" 
-            referrerpolicy="no-referrer-when-downgrade"><br>
-        </iframe>
+            referrerpolicy="no-referrer-when-downgrade"></iframe>
     </div>
     <footer>
         &copy; 2024 | Sportify <br>
