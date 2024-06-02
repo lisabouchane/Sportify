@@ -9,6 +9,8 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
+            background-color: #333;
+
         }
         header {
             background-color: #F5A510;
@@ -115,9 +117,11 @@
         }
         .initial-message {
             text-align: center;
-            margin-top: 20px;
+            padding: 30px;
+            margin-top: 0px;
             font-size: 20px;
-            color: black;
+            color: orange;
+            background-color: #333;
         }
         .activities {
             background-color: #333;
@@ -173,6 +177,48 @@
             border: #333;
             color: #333;
         }
+
+        .inner-rectangle {
+            margin: 10px auto -70px auto; /* Ajustement pour le centrage */
+
+            background-color: #333;
+            width: 60%;
+            padding-left: 100px;
+            padding-right: 100px;
+            padding-top: 50px;
+            padding-bottom: 50px;
+            border: 1px solid orange;
+            text-align: center;
+            margin-top: 70px;
+            margin-bottom: 200px;
+        }
+
+        .italic-text {
+            font-style: italic;
+            color: orange;
+            font-size: 20px; /* Ajustez cette valeur selon vos besoins */
+        }
+
+        .barre-blanche {
+            height: 1px;             /* Hauteur de 1 pixel */
+            width: 30%;              /* Largeur de 50% */
+            background-color: white; /* Couleur de fond blanche */
+            position: absolute;      /* Positionnement absolu */
+            left: 50%;               /* Positionne le centre de la barre au centre de l'écran */
+            top: 49%;                /* Positionne la barre verticalement au centre de l'écran */
+            transform: translate(-50%, -50%); /* Centre la barre en ajustant la position */
+        }
+        .barre-blanche2 {
+            height: 1px;             /* Hauteur de 1 pixel */
+            width: 30%;              /* Largeur de 50% */
+            background-color: white; /* Couleur de fond blanche */
+            position: absolute;      /* Positionnement absolu */
+            left: 50%;               /* Positionne le centre de la barre au centre de l'écran */
+            top: 43%;                /* Positionne la barre verticalement au centre de l'écran */
+            transform: translate(-50%, -50%); /* Centre la barre en ajustant la position */
+        }
+
+
     </style>
 </head>
 <body>
@@ -196,9 +242,8 @@
     <section class="activities">
         <h2>Activités sportives</h2>
     </section>
-    <div class="initial-message">
-        Découvrez nos activités sportives encadrés par nos coachs professionnels!
-    </div>
+    <div class="barre-blanche2"></div>
+
     <div class="menu">
         <a href="#musculation">Musculation</a>
         <a href="#fitness">Fitness</a>
@@ -206,6 +251,18 @@
         <a href="#cardio-training">Cardio-Training</a>
         <a href="#cours-collectifs">Cours Collectifs</a>
     </div>
+
+
+    <div class="barre-blanche"></div>
+
+
+    <div class="inner-rectangle">
+        <p class="italic-text">Découvrez nos activités sportives encadrés par nos coachs professionnels!</p>
+        
+
+     
+    </div>
+
 
     <div id="musculation" class="coach-info">
         <h2>Musculation</h2>
@@ -578,4 +635,3 @@ document.addEventListener("DOMContentLoaded", function() {
 </script>
 </body>
 </html>
-
