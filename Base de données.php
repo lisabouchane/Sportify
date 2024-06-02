@@ -1,233 +1,566 @@
-<?php
-// Démarrage de la session
-session_start();
-
-// Configuration de la base de données
-$host = 'localhost';
-$db = 'sportify';
-$user = 'root';
-$pass = '';
-try {
-    $pdo = new PDO("mysql:host=$host;dbname=$db", $user, $pass);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (PDOException $e) {
-    die("Could not connect to the database $db :" . $e->getMessage());
-}
-
-// Fonctions utilitaires
-function registerUser($name, $email, $password, $role) {
-    global $pdo;
-    $stmt = $pdo->prepare("INSERT INTO users (name, email, password, role) VALUES (?, ?, ?, ?)");
-    $stmt->execute([$name, $email, password_hash($password, PASSWORD_BCRYPT), $role]);
-}
-
-function loginUser($email, $password) {
-    global $pdo;
-    $stmt = $pdo->prepare("SELECT * FROM users WHERE email = ?");
-    $stmt->execute([$email]);
-    $user = $stmt->fetch();
-    if ($user && password_verify($password, $user['password'])) {
-        $_SESSION['user_id'] = $user['id'];
-        $_SESSION['user_role'] = $user['role'];
-        return true;
-    }
-    return false;
-}
-
-function logoutUser() {
-    session_destroy();
-}
-
-function getCurrentUser() {
-    if (isset($_SESSION['user_id'])) {
-        global $pdo;
-        $stmt = $pdo->prepare("SELECT * FROM users WHERE id = ?");
-        $stmt->execute([$_SESSION['user_id']]);
-        return $stmt->fetch();
-    }
-    return null;
-}
-
-function getCoaches() {
-    global $pdo;
-    $stmt = $pdo->query("SELECT * FROM coaches JOIN users ON coaches.user_id = users.id");
-    return $stmt->fetchAll();
-}
-
-function addCoach($userId, $specialty, $bio) {
-    global $pdo;
-    $stmt = $pdo->prepare("INSERT INTO coaches (user_id, specialty, bio) VALUES (?, ?, ?)");
-    $stmt->execute([$userId, $specialty, $bio]);
-}
-
-function scheduleAppointment($clientId, $coachId, $time) {
-    global $pdo;
-    $stmt = $pdo->prepare("INSERT INTO appointments (client_id, coach_id, appointment_time) VALUES (?, ?, ?)");
-    $stmt->execute([$clientId, $coachId, $time]);
-}
-
-function cancelAppointment($appointmentId) {
-    global $pdo;
-    $stmt = $pdo->prepare("UPDATE appointments SET status = 'cancelled' WHERE id = ?");
-    $stmt->execute([$appointmentId]);
-}
-
-function getAppointmentsByUser($userId) {
-    global $pdo;
-    $stmt = $pdo->prepare("SELECT * FROM appointments WHERE client_id = ? OR coach_id = ?");
-    $stmt->execute([$userId, $userId]);
-    return $stmt->fetchAll();
-}
-
-// Gestion des actions via URL
-$action = isset($_GET['action']) ? $_GET['action'] : 'index';
-
-// Page d'accueil
-if ($action == 'index') {
-    $user = getCurrentUser();
-    if ($user) {
-        header("Location: ?action=dashboard");
-        exit();
-    }
-    echo "<h1>Bienvenue sur votre compte Sportify</h1>";
-    echo '<a href="?action=login">Se connecter</a> | <a href="?action=register">S\'inscrire</a>';
-}
-
-// Formulaire de connexion
-if ($action == 'login') {
-    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        if (loginUser($_POST['email'], $_POST['password'])) {
-            header("Location: ?action=dashboard");
-            exit();
-        } else {
-            echo "<p>Email ou mot de passe incorrect</p>";
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Activités sportives - Sportify</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
         }
-    }
-    echo '<h1>Connexion</h1>';
-    echo '<form method="post">';
-    echo '<input type="email" name="email" placeholder="Email" required>';
-    echo '<input type="password" name="password" placeholder="Mot de passe" required>';
-    echo '<button type="submit">Se connecter</button>';
-    echo '</form>';
-}
-
-// Formulaire d'inscription
-if ($action == 'register') {
-    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        registerUser($_POST['name'], $_POST['email'], $_POST['password'], $_POST['role']);
-        header("Location: ?action=login");
-        exit();
-    }
-    echo '<h1>Inscription</h1>';
-    echo '<form method="post">';
-    echo '<input type="text" name="name" placeholder="Nom" required>';
-    echo '<input type="email" name="email" placeholder="Email" required>';
-    echo '<input type="password" name="password" placeholder="Mot de passe" required>';
-    echo '<select name="role" required>';
-    echo '<option value="client">Client</option>';
-    echo '<option value="coach">Coach</option>';
-    echo '<option value="admin">Administrateur</option>';
-    echo '</select>';
-    echo '<button type="submit">S\'inscrire</button>';
-    echo '</form>';
-}
-
-// Déconnexion
-if ($action == 'logout') {
-    logoutUser();
-    header("Location: ?action=index");
-    exit();
-}
-
-// Tableau de bord
-if ($action == 'dashboard') {
-    $user = getCurrentUser();
-    if (!$user) {
-        header("Location: ?action=login");
-        exit();
-    }
-    echo '<h1>Bienvenue, ' . htmlspecialchars($user['name']) . '!</h1>';
-    echo '<a href="?action=logout">Se déconnecter</a>';
-    if ($user['role'] == 'admin') {
-        echo '<h2>Administration</h2>';
-        echo '<a href="?action=add_coach">Ajouter un coach</a>';
-    } elseif ($user['role'] == 'coach') {
-        echo '<h2>Coach</h2>';
-        echo '<p>Vos rendez-vous :</p>';
-        $appointments = getAppointmentsByUser($user['id']);
-        foreach ($appointments as $appointment) {
-            echo '<p>RDV avec le client ID ' . $appointment['client_id'] . ' le ' . $appointment['appointment_time'] . '</p>';
+        header {
+            background-color: #F5A510;
+            color: white;
+            padding-top: 100px;
+            padding-bottom: 20px;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
         }
-    } else {
-        echo '<h2>Client</h2>';
-        echo '<p>Prendre un rendez-vous :</p>';
-        echo '<form method="post" action="?action=schedule">';
-        echo '<select name="coach_id" required>';
-        $coaches = getCoaches();
-        foreach ($coaches as $coach) {
-            echo '<option value="' . $coach['id'] . '">' . $coach['name'] . ' (' . $coach['specialty'] . ')</option>';
+        footer {
+            background-color: orange;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
         }
-        echo '</select>';
-        echo '<input type="datetime-local" name="appointment_time" required>';
-        echo '<button type="submit">Prendre RDV</button>';
-        echo '</form>';
-        echo '<h3>Vos rendez-vous :</h3>';
-        $appointments = getAppointmentsByUser($user['id']);
-        foreach ($appointments as $appointment) {
-            echo '<p>RDV avec le coach ID ' . $appointment['coach_id'] . ' le ' . $appointment['appointment_time'] . '</p>';
-            if ($appointment['status'] == 'scheduled') {
-                echo '<form method="post" action="?action=cancel"><input type="hidden" name="appointment_id" value="' . $appointment['id'] . '"><button type="submit">Annuler</button></form>';
-            }
+        .menu {
+            background-color: #333;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
         }
-    }
-}
+        .menu a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+        .menu a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+        .coach-info {
+            display: none;
+            background-color: #333;
+            color: white;
+            padding: 25px 0;
+            font-size: 25px;
+            text-align: center;
+            margin: 20px;
+        }
+        .coach-photo {
+            vertical-align: top;
+            text-align: center;
+            margin: 0 2.5%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .coach-photo img {
+            margin-top: 30px;
+            max-width: 400px;
+            height: auto;
+        }
+        .coach-cv, .coach-dispo {
+            margin: 2.5px;
+            vertical-align: top;
+            text-align: center;
+        }
+        .available {
+            color: green;
+        }
+        .unavailable {
+            color: red;
+        }
+        table {
+            margin: 0 auto;
+            border-collapse: collapse;
+            width: 50%;
+        }
+        th, td {
+            border: 1px solid white;
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background-color: #555;
+        }
+        .unavailable-cell {
+            background-color: red;
+        }
+        .available-cell {
+            background-color: green;
+        }
+        .button-container, .button-container2 {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .button-container button, .button-container2 button {
+            background-color: #333;
+            border: 2px solid orange;
+            border-radius: 5px;
+            color: orange;
+            font-size: 18px;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+        .button-container button:hover, .button-container2 button:hover {
+            background-color: orange;
+            color: white;
+        }
+        .initial-message {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 20px;
+            color: black;
+        }
+        .activities {
+            background-color: #333;
+            color: orange;
+            text-align: center;
+            padding: 10px 0;
+        }
+        .activities h2 {
+            font-size: 20px;
+        }
+        .wrapper {
+            border: 0px solid #ccc;
+            max-width: 100%;
+            margin: 0px auto;
+            padding: 10px;
+            background-color: #333;
+        }
+        nav {
+            text-align: center;
+            margin: 20px 0;
+        }
+        nav a {
+            display: inline-block;
+            background-color: orange;
+            border: 2px solid #555;
+            padding: 10px 20px;
+            margin: 0 5px;
+            text-decoration: none;
+            border-radius: 10px;
+            color: white;
+        }
+        nav a:hover {
+            background-color: white;
+            color: #333;
+        }
+        .sub-menu {
+            display: none;
+            text-align: center;
+            margin: 20px 0;
+        }
+        .sub-menu a {
+            display: inline-block;
+            background-color: #333;
+            border: 1px solid orange;
+            padding: 8px 16px;
+            margin: 5px;
+            text-decoration: none;
+            border-radius: 8px;
+            color: orange;
+        }
+        .sub-menu a:hover {
+            background-color: #e0e0e0;
+            border: #333;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
 
-// Ajouter un coach (Admin seulement)
-if ($action == 'add_coach') {
-    $user = getCurrentUser();
-    if (!$user || $user['role'] != 'admin') {
-        header("Location: ?action=login");
-        exit();
-    }
-    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        addCoach($_POST['user_id'], $_POST['specialty'], $_POST['bio']);
-        header("Location: ?action=dashboard");
-        exit();
-    }
-    echo '<h1>Ajouter un coach</h1>';
-    echo '<form method="post">';
-    echo '<input type="number" name="user_id" placeholder="ID de l\'utilisateur" required>';
-    echo '<input type="text" name="specialty" placeholder="Spécialité" required>';
-    echo '<textarea name="bio" placeholder="Biographie"></textarea>';
-    echo '<button type="submit">Ajouter</button>';
-    echo '</form>';
-}
+    <header><span style="font-size: 42px;">Sportify</span><br><br><br></header>
+    <div class="wrapper">
+        <nav>
+            <a href="accueil.html">Accueil</a>
+            <a href="#" id="tout-parcourir-btn">Tout Parcourir</a>
+            <a href="recherche.php">Recherche</a>
+            <a href="#">Rendez-vous</a>
+            <a href="index.html">Votre Compte</a>
+        </nav>
+        <div class="sub-menu" id="sub-menu">
+            <a href="activité_sportive.html" id="activité_sportive-link">Activités sportives</a>
+            <a href="sports_competition.html" id="sports-competition-link">Les Sports de compétition</a>
+            <a href="salle_omnes.html" id="salle-de-sport-link">Salle de sport Omnes</a>
+        </div>
+    </div>
 
-// Prendre un rendez-vous (Client seulement)
-if ($action == 'schedule') {
-    $user = getCurrentUser();
-    if (!$user || $user['role'] != 'client') {
-        header("Location: ?action=login");
-        exit();
-    }
-    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        scheduleAppointment($user['id'], $_POST['coach_id'], $_POST['appointment_time']);
-        header("Location: ?action=dashboard");
-        exit();
-    }
-}
+    <section class="activities">
+        <h2>Activités sportives</h2>
+    </section>
+    <div class="initial-message">
+        Découvrez nos activités sportives encadrés par nos coachs professionnels!
+    </div>
+    <div class="menu">
+        <a href="#musculation">Musculation</a>
+        <a href="#fitness">Fitness</a>
+        <a href="#biking">Biking</a>
+        <a href="#cardio-training">Cardio-Training</a>
+        <a href="#cours-collectifs">Cours Collectifs</a>
+    </div>
 
-// Annuler un rendez-vous
-if ($action == 'cancel') {
-    $user = getCurrentUser();
-    if (!$user || $user['role'] == 'admin') {
-        header("Location: ?action=login");
-        exit();
-    }
-    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        cancelAppointment($_POST['appointment_id']);
-        header("Location: ?action=dashboard");
-        exit();
-    }
-}
-?>
+    <div id="musculation" class="coach-info">
+        <h2>Musculation</h2>
+        <div class="coach-photo">
+            <img src="vida.jpg" alt="Coach Musculation">
+            <p>Vida Coach</p>
+            <p>Bureau: B201</p>
+            <p>Tel : 06 36 59 42 61</p>
+            <p>Email : vida.coach@gmail.com</p>
+        </div>
+        <div class="coach-dispo">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Jour</th>
+                        <th>Matin</th>
+                        <th>Après-midi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Lundi</td>
+                        <td class="unavailable-cell">Absent</td>
+                        <td class="available-cell">Disponible</td>
+                    </tr>
+                    <tr>
+                        <td>Mardi</td>
+                        <td class="unavailable-cell">Absent</td>
+                        <td class="unavailable-cell">Absent</td>
+                    </tr>
+                    <tr>
+                        <td>Mercredi</td>
+                        <td class="available-cell">Disponible</td>
+                        <td class="available-cell">Disponible</td>
+                    </tr>
+                    <tr>
+                        <td>Jeudi</td>
+                        <td class="unavailable-cell">Absent</td>
+                        <td class="unavailable-cell">Absent</td>
+                    </tr>
+                    <tr>
+                        <td>Vendredi</td>
+                        <td class="available-cell">Disponible</td>
+                        <td class="available-cell">Disponible</td>
+                    </tr>
+                    <tr>
+                        <td>Samedi</td>
+                        <td class="unavailable-cell">Absent</td>
+                        <td class="unavailable-cell">Absent</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+            <div class="button-container">
+                <button>Prendre un RDV</button>
+                <button onclick="toggleExtraButtons(this)">Communiquer avec le coach</button>
+                <button><a href="cv_vida.pdf" style="color: inherit; text-decoration: none;">Voir son CV</a></button>
+            </div>
+            <div id="extra-buttons" class="extra-buttons">
+                <div class="button-container2">
+                    <button>Envoyer un message</button>
+                    <button>Appel audio</button>
+                    <button>Appel vidéo</button>
+                </div>
+            </div>
+    </div>
+
+    <div id="fitness" class="coach-info">
+        <h2>Fitness</h2>
+        <div class="coach-photo">
+            <img src="axel.jpg" alt="Coach Fitness">
+            <p>Axel Coach</p>
+            <p>Bureau: B202</p>
+            <p>Tel : 06 65 94 50 92</p>
+            <p>Email : axel.coach@gmail.com</p>
+        </div>
+                <div class="coach-dispo">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Jour</th>
+                        <th>Matin</th>
+                        <th>Après-midi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Lundi</td>
+                        <td class="unavailable-cell">Absent</td>
+                        <td class="available-cell">Disponible</td>
+                    </tr>
+                    <tr>
+                        <td>Mardi</td>
+                        <td class="unavailable-cell">Absent</td>
+                        <td class="unavailable-cell">Absent</td>
+                    </tr>
+                    <tr>
+                        <td>Mercredi</td>
+                        <td class="available-cell">Disponible</td>
+                        <td class="available-cell">Disponible</td>
+                    </tr>
+                    <tr>
+                        <td>Jeudi</td>
+                        <td class="unavailable-cell">Absent</td>
+                        <td class="unavailable-cell">Absent</td>
+                    </tr>
+                    <tr>
+                        <td>Vendredi</td>
+                        <td class="available-cell">Disponible</td>
+                        <td class="available-cell">Disponible</td>
+                    </tr>
+                    <tr>
+                        <td>Samedi</td>
+                        <td class="unavailable-cell">Absent</td>
+                        <td class="unavailable-cell">Absent</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="button-container">
+            <button>Prendre un RDV</button>
+            <button onclick="toggleExtraButtons(this)">Communiquer avec le coach</button>
+            <button><a href="cv_axel.pdf" style="color: inherit; text-decoration: none;">Voir son CV</a></button>
+        </div>
+        <div id="extra-buttons" class="extra-buttons">
+            <div class="button-container2">
+                <button>Envoyer un message</button>
+                <button>Appel audio</button>
+                <button>Appel vidéo</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="biking" class="coach-info">
+        <h2>Biking</h2>
+        <div class="coach-photo">
+            <img src="lisa.jpg" alt="Coach Biking">
+            <p>Lisa Coach</p>
+            <p>Bureau: B212</p>
+            <p>Tel : 06 75 91 60 32</p>
+            <p>Email : lisa.coach@gmail.com</p>
+        </div>
+                <div class="coach-dispo">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Jour</th>
+                        <th>Matin</th>
+                        <th>Après-midi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Lundi</td>
+                        <td class="unavailable-cell">Absent</td>
+                        <td class="available-cell">Disponible</td>
+                    </tr>
+                    <tr>
+                        <td>Mardi</td>
+                        <td class="unavailable-cell">Absent</td>
+                        <td class="unavailable-cell">Absent</td>
+                    </tr>
+                    <tr>
+                        <td>Mercredi</td>
+                        <td class="available-cell">Disponible</td>
+                        <td class="available-cell">Disponible</td>
+                    </tr>
+                    <tr>
+                        <td>Jeudi</td>
+                        <td class="unavailable-cell">Absent</td>
+                        <td class="unavailable-cell">Absent</td>
+                    </tr>
+                    <tr>
+                        <td>Vendredi</td>
+                        <td class="available-cell">Disponible</td>
+                        <td class="available-cell">Disponible</td>
+                    </tr>
+                    <tr>
+                        <td>Samedi</td>
+                        <td class="unavailable-cell">Absent</td>
+                        <td class="unavailable-cell">Absent</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="button-container">
+            <button>Prendre un RDV</button>
+            <button onclick="toggleExtraButtons(this)">Communiquer avec le coach</button>
+            <button><a href="cv_lisa.pdf" style="color: inherit; text-decoration: none;">Voir son CV</a></button>
+        </div>
+        <div id="extra-buttons" class="extra-buttons">
+            <div class="button-container2">
+                <button>Envoyer un message</button>
+                <button>Appel audio</button>
+                <button>Appel vidéo</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="cardio-training" class="coach-info">
+        <h2>Cardio-Training</h2>
+        <div class="coach-photo">
+            <img src="melinda.jpg" alt="Coach Cardio-Training">
+            <p>Melinda Coach</p>
+            <p>Bureau: B213</p>
+            <p>Tel : 06 55 41 30 58</p>
+            <p>Email : melinda.coach@gmail.com</p>
+        </div>
+                <div class="coach-dispo">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Jour</th>
+                        <th>Matin</th>
+                        <th>Après-midi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Lundi</td>
+                        <td class="unavailable-cell">Absent</td>
+                        <td class="available-cell">Disponible</td>
+                    </tr>
+                    <tr>
+                        <td>Mardi</td>
+                        <td class="unavailable-cell">Absent</td>
+                        <td class="unavailable-cell">Absent</td>
+                    </tr>
+                    <tr>
+                        <td>Mercredi</td>
+                        <td class="available-cell">Disponible</td>
+                        <td class="available-cell">Disponible</td>
+                    </tr>
+                    <tr>
+                        <td>Jeudi</td>
+                        <td class="unavailable-cell">Absent</td>
+                        <td class="unavailable-cell">Absent</td>
+                    </tr>
+                    <tr>
+                        <td>Vendredi</td>
+                        <td class="available-cell">Disponible</td>
+                        <td class="available-cell">Disponible</td>
+                    </tr>
+                    <tr>
+                        <td>Samedi</td>
+                        <td class="unavailable-cell">Absent</td>
+                        <td class="unavailable-cell">Absent</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="button-container">
+            <button>Prendre un RDV</button>
+            <button onclick="toggleExtraButtons(this)">Communiquer avec le coach</button>
+            <button><a href="cv_melinda.pdf" style="color: inherit; text-decoration: none;">Voir son CV</a></button>
+        </div>
+        <div id="extra-buttons" class="extra-buttons">
+            <div class="button-container2">
+                <button>Envoyer un message</button>
+                <button>Appel audio</button>
+                <button>Appel vidéo</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="cours-collectifs" class="coach-info">
+        <h2>Cours Collectifs</h2>
+        <div class="coach-photo">
+            <img src="alexiane.jpg" alt="Coach Cours-Collectifs">
+            <p>Alex Coach</p>
+            <p>Bureau: B214</p>
+            <p>Tel : 07 89 63 45 12</p>
+            <p>Email : alexiane.coach@gmail.com</p>
+        </div>
+                <div class="coach-dispo">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Jour</th>
+                        <th>Matin</th>
+                        <th>Après-midi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Lundi</td>
+                        <td class="unavailable-cell">Absent</td>
+                        <td class="available-cell">Disponible</td>
+                    </tr>
+                    <tr>
+                        <td>Mardi</td>
+                        <td class="unavailable-cell">Absent</td>
+                        <td class="unavailable-cell">Absent</td>
+                    </tr>
+                    <tr>
+                        <td>Mercredi</td>
+                        <td class="available-cell">Disponible</td>
+                        <td class="available-cell">Disponible</td>
+                    </tr>
+                    <tr>
+                        <td>Jeudi</td>
+                        <td class="unavailable-cell">Absent</td>
+                        <td class="unavailable-cell">Absent</td>
+                    </tr>
+                    <tr>
+                        <td>Vendredi</td>
+                        <td class="available-cell">Disponible</td>
+                        <td class="available-cell">Disponible</td>
+                    </tr>
+                    <tr>
+                        <td>Samedi</td>
+                        <td class="unavailable-cell">Absent</td>
+                        <td class="unavailable-cell">Absent</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="button-container">
+            <button>Prendre un RDV</button>
+            <button onclick="toggleExtraButtons(this)">Communiquer avec le coach</button>
+            <button><a href="cv_alexiane.pdf" style="color: inherit; text-decoration: none;">Voir son CV</a></button>
+        </div>
+        <div id="extra-buttons" class="extra-buttons">
+            <div class="button-container2">
+                <button>Envoyer un message</button>
+                <button>Appel audio</button>
+                <button>Appel vidéo</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        &copy; 2024 | Sportify <br>
+        16 rue Sextius Michel, 75015 <br>
+        sportify.coach@gmail.com <br>
+        06 65 94 50 92 <br>
+    </footer>
+
+    <script>
+        document.querySelectorAll('.menu a').forEach(item => {
+            item.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                const sections = document.querySelectorAll('.coach-info');
+                const initialMessage = document.querySelector('.initial-message');
+                initialMessage.style.display = 'none'; // Hide the initial message
+                sections.forEach(section => {
+                    section.style.display = 'none';
+                });
+                const activeSection = document.getElementById(targetId);
+                if (activeSection) {
+                    activeSection.style.display = 'block';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
