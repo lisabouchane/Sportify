@@ -3,7 +3,7 @@ Pour base de données (connexion Client/Admin/Coach) :
 
 ** ce que vous devez mettre dans votre sql : **
 
-r
+
 
 CREATE TABLE IF NOT EXISTS `clients` (
   `id_client` int(11) NOT NULL AUTO_INCREMENT,
