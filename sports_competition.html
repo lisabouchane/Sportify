@@ -415,5 +415,21 @@
 });
 
     </script>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const hash = window.location.hash;
+    if (hash) {
+        document.querySelectorAll('.coach-info').forEach(section => {
+            section.style.display = 'none';
+        });
+        const sectionToShow = document.querySelector(hash);
+        if (sectionToShow) {
+            sectionToShow.style.display = 'block';
+        }
+    }
+});
+</script>
 </body>
 </html>
+
+
