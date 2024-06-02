@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html lang="fr"> 
-<head>      
+<html lang="fr">
+<head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sports de compétition - Sportify</title>
-    <style> 
-        body {  
+    <style>
+        body {
             font-family: Arial, sans-serif;
-            margin: 0;  
-            padding: 0;  
-        } 
+            margin: 0;
+            padding: 0;
+        }
         header {
             background-color: orange;
             color: white;
@@ -24,7 +24,7 @@
             color: white;
             text-align: center;
             padding: 10px 0;
-        } 
+        }
         .menu {
             background-color: #333;
             overflow: hidden;
@@ -81,8 +81,8 @@
         .chat-box, .voice-call-box, .video-call-box {
             display: none;
             position: fixed;
-            bottom: 0;
-            right: 0;
+            bottom: 10px;
+            right: 10px;
             width: 300px;
             max-height: 400px;
             border: 1px solid #ccc;
@@ -133,6 +133,23 @@
             border: none;
             border-radius: 3px;
             margin-left: 5px;
+        }
+        .button-container {
+            margin-top: 10px;
+            text-align: center;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #333;
+            border: none;
+            color: orange;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: orange;
+            color: white;
         }
         .activities {
             background-color: #333;
@@ -275,7 +292,6 @@
     font-size: 20px;
     color: black;
         }
-
     </style>
 </head>
 <body>
@@ -305,7 +321,7 @@
         <a href="#Natation">Natation</a>
         <a href="#Plongeon">Plongeon</a>
     </div>
-     <div class="initial-message">
+    <div class="initial-message">
         <p>Découvrez nos talentueux coachs de sports de compétitions et prenez rendez-vous avec eux pour devenir des athlètes confirmés !</p>
     </div>
     <div id="Basket" class="coach-info">
@@ -319,9 +335,11 @@
         <div class="coach-cv">
             <p>CV: <a href="cvbasket.pdf">Télécharger le CV</a></p>
             <p class="available">Disponible maintenant</p>
-            <button class="chat-button">Envoyer un message</button>
-            <button class="voice-call-button">Appel vocal</button>
-            <button class="video-call-button">Appel vidéo</button>
+            <div class="button-container">
+                <button onclick="openChat()">Envoyer un message</button>
+                <button onclick="openVoiceCall()">Appel audio</button>
+                <button onclick="openVideoCall()">Appel vidéo</button>
+            </div>
         </div>
     </div>
     <div id="Football" class="coach-info">
@@ -348,6 +366,11 @@
         <div class="coach-cv">
             <p>CV: <a href="cvrugby.pdf">Télécharger le CV</a></p>
             <p class="available">Disponible maintenant</p>
+            <div class="button-container">
+                <button onclick="openChat()">Envoyer un message</button>
+                <button onclick="openVoiceCall()">Appel audio</button>
+                <button onclick="openVideoCall()">Appel vidéo</button>
+            </div>
         </div>
     </div>
     <div id="Tennis" class="coach-info">
@@ -374,6 +397,11 @@
         <div class="coach-cv">
             <p>CV: <a href="cvnatation.pdf">Télécharger le CV</a></p>
             <p class="available">Disponible maintenant</p>
+            <div class="button-container">
+                <button onclick="openChat()">Envoyer un message</button>
+                <button onclick="openVoiceCall()">Appel audio</button>
+                <button onclick="openVideoCall()">Appel vidéo</button>
+            </div>
         </div>
     </div>
     <div id="Plongeon" class="coach-info">
@@ -386,7 +414,45 @@
         </div>
         <div class="coach-cv">
             <p>CV: <a href="cvplongeon.pdf">Télécharger le CV</a></p>
-            <p class="unavailable">Non disponible maintenant</p>
+            <p class="available">Disponible maintenant</p>
+             <div class="button-container">
+                <button onclick="openChat()">Envoyer un message</button>
+                <button onclick="openVoiceCall()">Appel audio</button>
+                <button onclick="openVideoCall()">Appel vidéo</button>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="chat-box" id="chatBox">
+        <div class="chat-header">
+            Chat
+            <span class="close-chat" onclick="closeChat()">×</span>
+        </div>
+        <div class="chat-messages"></div>
+        <div class="chat-input">
+            <input type="text" placeholder="Tapez votre message ici...">
+            <button>Envoyer</button>
+        </div>
+    </div>
+
+    <div class="voice-call-box" id="voiceCallBox">
+        <div class="voice-call-header">
+            Appel Vocal
+            <span class="close-voice-call" onclick="closeVoiceCall()">×</span>
+        </div>
+        <div class="voice-call-messages">
+            <p>Appel en cours...</p>
+        </div>
+    </div>
+
+    <div class="video-call-box" id="videoCallBox">
+        <div class="video-call-header">
+            Appel Vidéo
+            <span class="close-video-call" onclick="closeVideoCall()">×</span>
+        </div>
+        <div class="video-call-messages">
+            <p>Appel vidéo en cours...</p>
         </div>
     </div>
 
@@ -396,40 +462,54 @@
         sportify.coach@gmail.com <br>
         06 65 94 50 92 <br>
     </footer>
-    <script>
-      document.querySelectorAll('.menu a').forEach(item => {
-    item.addEventListener('click', function(e) {
-        e.preventDefault();
-        const targetId = this.getAttribute('href').substring(1);
-        const sections = document.querySelectorAll('.coach-info');
-        const initialMessage = document.querySelector('.initial-message'); // Sélectionnez le message initial
-        initialMessage.style.display = 'none'; // Cachez le message initial
-        sections.forEach(section => {
-            section.style.display = 'none';
-        });
-        const activeSection = document.getElementById(targetId);
-        if (activeSection) {
-            activeSection.style.display = 'block';
-        }
-    });
-});
 
-    </script>
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-    const hash = window.location.hash;
-    if (hash) {
-        document.querySelectorAll('.coach-info').forEach(section => {
-            section.style.display = 'none';
-        });
-        const sectionToShow = document.querySelector(hash);
-        if (sectionToShow) {
-            sectionToShow.style.display = 'block';
+    <script>
+        function openChat() {
+            document.getElementById('chatBox').style.display = 'block';
         }
-    }
-});
-</script>
+        function closeChat() {
+            document.getElementById('chatBox').style.display = 'none';
+        }
+        function openVoiceCall() {
+            document.getElementById('voiceCallBox').style.display = 'block';
+        }
+        function closeVoiceCall() {
+            document.getElementById('voiceCallBox').style.display = 'none';
+        }
+        function openVideoCall() {
+            document.getElementById('videoCallBox').style.display = 'block';
+        }
+        function closeVideoCall() {
+            document.getElementById('videoCallBox').style.display = 'none';
+        }
+        document.querySelectorAll('.menu a').forEach(item => {
+            item.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                const sections = document.querySelectorAll('.coach-info');
+                const initialMessage = document.querySelector('.initial-message');
+                initialMessage.style.display = 'none';
+                sections.forEach(section => {
+                    section.style.display = 'none';
+                });
+                const activeSection = document.getElementById(targetId);
+                if (activeSection) {
+                    activeSection.style.display = 'block';
+                }
+            });
+        });
+        document.addEventListener("DOMContentLoaded", function() {
+            const hash = window.location.hash;
+            if (hash) {
+                document.querySelectorAll('.coach-info').forEach(section => {
+                    section.style.display = 'none';
+                });
+                const sectionToShow = document.querySelector(hash);
+                if (sectionToShow) {
+                    sectionToShow.style.display = 'block';
+                }
+            }
+        });
+    </script>
 </body>
 </html>
-
-
