@@ -13,7 +13,6 @@
         header {
             background-color: #F5A510;
             color: white;
-            /*padding: 50px 0;*/
             padding-top: 100px;
             padding-bottom: 20px;
             text-align: center;
@@ -26,14 +25,12 @@
             text-align: center;
             padding: 10px 0;
         }
-
         .menu {
             background-color: #333;
             overflow: hidden;
             display: flex;
             justify-content: center;
         }
-
         .menu a {
             display: block;
             color: white;
@@ -41,13 +38,12 @@
             padding: 14px 16px;
             text-decoration: none;
         }
-
         .menu a:hover {
             background-color: #ddd;
             color: black;
         }
-
         .coach-info {
+            display: none;
             background-color: #333;
             color: white;
             padding: 25px 0;
@@ -55,130 +51,74 @@
             text-align: center;
             margin: 20px;
         }
-
-        
         .coach-photo {
-            /*display: inline-block;*/
             vertical-align: top;
             text-align: center;
             margin: 0 2.5%;
             display: flex;
             flex-direction: column;
-            align-items: center; /* Center the photo horizontally */
+            align-items: center;
         }
-
-        .coach-cv {
-            margin: 02.50px;
-            vertical-align: top;
-            text-align: center;
-        } 
-
-        .coach-dispo {
-            margin: 20px;
-            vertical-align: top;
-            text-align: center;
-        }
-
         .coach-photo img {
             margin-top: 30px;
             max-width: 400px;
             height: auto;
         }
-
-        .coach-details {
-            margin-left: 20px;
+        .coach-cv, .coach-dispo {
+            margin: 2.5px;
+            vertical-align: top;
+            text-align: center;
         }
-
         .available {
             color: green;
         }
-
         .unavailable {
             color: red;
         }
-
         table {
             margin: 0 auto;
             border-collapse: collapse;
             width: 50%;
         }
-
         th, td {
             border: 1px solid white;
             padding: 10px;
             text-align: center;
         }
-
         th {
             background-color: #555;
         }
-
         .unavailable-cell {
             background-color: red;
         }
-
         .available-cell {
             background-color: green;
         }
-
-        .button-container {
-            display: flex;
-            justify-content: center;
-            margin-top: 70px;
-        }
-
-        .button-container button {
-            background-color: orange;
-            border: 2px solid orange;
-            border-radius: 5px;
-            color: white;
-            font-size: 18px;
-            margin: 0 10px;
-            padding: 10px 20px;
-            cursor: pointer;
-            transition: background-color 0.3s, border-color 0.3s;
-        }
-
-        .button-container button:hover {
-            background-color: #333;
-            border-color: #999;
-        }
-
-        .button-container2 {
+        .button-container, .button-container2 {
             display: flex;
             justify-content: center;
             margin-top: 20px;
         }
-
-        .button-container2 button {
+        .button-container button, .button-container2 button {
             background-color: #333;
             border: 2px solid orange;
             border-radius: 5px;
             color: orange;
             font-size: 18px;
-            margin: 0 10px;
             padding: 10px 20px;
             cursor: pointer;
             transition: background-color 0.3s, border-color 0.3s;
         }
-
-        .button-container2 button:hover {
+        .button-container button:hover, .button-container2 button:hover {
             background-color: orange;
-            border-color: #999;
             color: white;
         }
-
-        .extra-buttons {
-            display: none;
-            flex-direction: column;
-            align-items: center;
-            margin-top: 10px;
+        .initial-message {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 20px;
+            color: black;
         }
-
-        .extra-buttons button {
-            margin-top: 10px;
-        }
-        
         .activities {
             background-color: #333;
             color: orange;
@@ -195,18 +135,10 @@
             padding: 10px;
             background-color: #333;
         }
-
-
-        .highlight {
-            color: black;
-            font-weight: bold;
-        }
-
         nav {
             text-align: center;
             margin: 20px 0;
         }
-
         nav a {
             display: inline-block;
             background-color: orange;
@@ -217,19 +149,15 @@
             border-radius: 10px;
             color: white;
         }
-
         nav a:hover {
             background-color: white;
             color: #333;
-
         }
-
         .sub-menu {
             display: none;
             text-align: center;
             margin: 20px 0;
         }
-
         .sub-menu a {
             display: inline-block;
             background-color: #333;
@@ -239,66 +167,18 @@
             text-decoration: none;
             border-radius: 8px;
             color: orange;
-            text-align: center;
         }
-
         .sub-menu a:hover {
             background-color: #e0e0e0;
             border: #333;
-            text-align: center;
             color: #333;
         }
-
-        section {
-            text-align: center;
-            padding: 0px;
-            font-size: 24px;
-            color: black;
-            border-bottom: 1px solid #ddd;
-            margin-bottom: 0px;
-            margin-top: -20px;
-        }
-
-
-        h1 {
-            text-align: center;
-            color: white;
-            background-color: #F5A510;
-        }
-
-        .controls{
-            position: absolute;
-            top: 420px; 
-            width: 100%;
-            display: flex;
-            justify-content: center; 
-        }
-
-        .prev, .next{
-            cursor: pointer;
-            padding: 10px 20px; 
-            background: #F5A510; 
-            color: white;
-            border: none;
-            border-radius: 5px;
-            margin: 0 5px; 
-        }
-
-        .prev:hover, .next:hover{
-            background: #333; 
-        }
-        
-
     </style>
-
-    
 </head>
 <body>
 
-    <header><span style="font-size: 42px;">Sportify</span> 
-        <br><br><br> 
-    </header>
-    <div class = "wrapper">
+    <header><span style="font-size: 42px;">Sportify</span><br><br><br></header>
+    <div class="wrapper">
         <nav>
             <a href="accueil.html">Accueil</a>
             <a href="#" id="tout-parcourir-btn">Tout Parcourir</a>
@@ -316,7 +196,9 @@
     <section class="activities">
         <h2>Activités sportives</h2>
     </section>
-
+    <div class="initial-message">
+        Découvrez nos activités sportives encadrés par nos coachs professionnels!
+    </div>
     <div class="menu">
         <a href="#musculation">Musculation</a>
         <a href="#fitness">Fitness</a>
@@ -378,7 +260,7 @@
             </table>
         </div>
             <div class="button-container">
-            <button onclick="window.location.href='planning_vida.php'">Prendre un RDV</button>
+                <button>Prendre un RDV</button>
                 <button onclick="toggleExtraButtons(this)">Communiquer avec le coach</button>
                 <button><a href="cv_vida.pdf" style="color: inherit; text-decoration: none;">Voir son CV</a></button>
             </div>
@@ -388,7 +270,6 @@
                     <button>Appel audio</button>
                     <button>Appel vidéo</button>
                 </div>
-                
             </div>
     </div>
 
@@ -445,7 +326,7 @@
             </table>
         </div>
         <div class="button-container">
-            <button onclick="window.location.href='planning_axel.php'">Prendre un RDV</button>
+            <button>Prendre un RDV</button>
             <button onclick="toggleExtraButtons(this)">Communiquer avec le coach</button>
             <button><a href="cv_axel.pdf" style="color: inherit; text-decoration: none;">Voir son CV</a></button>
         </div>
@@ -511,7 +392,7 @@
             </table>
         </div>
         <div class="button-container">
-            <button onclick="window.location.href='planning_lisa.php'">Prendre un RDV</button>
+            <button>Prendre un RDV</button>
             <button onclick="toggleExtraButtons(this)">Communiquer avec le coach</button>
             <button><a href="cv_lisa.pdf" style="color: inherit; text-decoration: none;">Voir son CV</a></button>
         </div>
@@ -577,7 +458,7 @@
             </table>
         </div>
         <div class="button-container">
-            <button onclick="window.location.href='planning_melinda.php'">Prendre un RDV</button>
+            <button>Prendre un RDV</button>
             <button onclick="toggleExtraButtons(this)">Communiquer avec le coach</button>
             <button><a href="cv_melinda.pdf" style="color: inherit; text-decoration: none;">Voir son CV</a></button>
         </div>
@@ -643,7 +524,7 @@
             </table>
         </div>
         <div class="button-container">
-            <button onclick="window.location.href='planning_alexiane.php'">Prendre un RDV</button>
+            <button>Prendre un RDV</button>
             <button onclick="toggleExtraButtons(this)">Communiquer avec le coach</button>
             <button><a href="cv_alexiane.pdf" style="color: inherit; text-decoration: none;">Voir son CV</a></button>
         </div>
@@ -655,6 +536,7 @@
             </div>
         </div>
     </div>
+
     <footer>
         &copy; 2024 | Sportify <br>
         16 rue Sextius Michel, 75015 <br>
@@ -663,29 +545,37 @@
     </footer>
 
     <script>
-        function toggleExtraButtons(button) {
-            var extraButtons = button.parentElement.nextElementSibling;
-            if (extraButtons.style.display === 'none' || extraButtons.style.display === '') {
-                extraButtons.style.display = 'flex';
-            } else {
-                extraButtons.style.display = 'none';
-            }
-        }
+        document.querySelectorAll('.menu a').forEach(item => {
+            item.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                const sections = document.querySelectorAll('.coach-info');
+                const initialMessage = document.querySelector('.initial-message');
+                initialMessage.style.display = 'none'; // Hide the initial message
+                sections.forEach(section => {
+                    section.style.display = 'none';
+                });
+                const activeSection = document.getElementById(targetId);
+                if (activeSection) {
+                    activeSection.style.display = 'block';
+                }
+            });
+        });
     </script>
-
 <script>
-    document.getElementById('tout-parcourir-btn').addEventListener('click', function(event) {
-        event.preventDefault();
-        var subMenu = document.getElementById('sub-menu');
-        if (subMenu.style.display === 'none' || subMenu.style.display === '') {
-            subMenu.style.display = 'block';
-        } else {
-            subMenu.style.display = 'none';
+document.addEventListener("DOMContentLoaded", function() {
+    const hash = window.location.hash;
+    if (hash) {
+        document.querySelectorAll('.coach-info').forEach(section => {
+            section.style.display = 'none';
+        });
+        const sectionToShow = document.querySelector(hash);
+        if (sectionToShow) {
+            sectionToShow.style.display = 'block';
         }
-    });
-
- 
+    }
+});
 </script>
-
 </body>
 </html>
+
