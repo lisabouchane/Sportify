@@ -57,7 +57,6 @@ $heures = range(9, 20);
             border-collapse: collapse;
             margin: 10px auto -70px auto; /* Ajustement pour le centrage */
             margin-top: 150px;
-
         }
         th, td {
             border: 1px solid #ddd;
@@ -72,6 +71,10 @@ $heures = range(9, 20);
         }
         .indisponible {
             background-color: #ccc;
+        }
+        .selected {
+            background-color: #6FBBFF;
+            color: white;
         }
         .text {
             font-weight: bold;
@@ -94,14 +97,28 @@ $heures = range(9, 20);
             document.querySelectorAll('.disponible').forEach(cell => {
                 cell.addEventListener('click', () => {
                     cell.classList.toggle('selected');
-                    let dateHeure = cell.getAttribute('data-dateheure');
+
+                    // Récupérer la date actuelle
+                    let today = new Date();
+                    let year = today.getFullYear();
+                    let month = String(today.getMonth() + 1).padStart(2, '0');
+                    let day = String(today.getDate()).padStart(2, '0');
+
+                    // Construire la date et l'heure du créneau cliqué
+                    let dateHeure = `${year}-${month}-${day} ${cell.getAttribute('data-heure')}:00:00`;
                     let coachId = <?= $coach_id ?>;
-                    
+                    let action = cell.classList.contains('selected') ? 'enregistrer' : 'supprimer';
+
                     // Envoi de la requête AJAX
                     let xhr = new XMLHttpRequest();
                     xhr.open("POST", "enregistrer_rendezvous.php", true);
                     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-                    xhr.send("coach_id=" + coachId + "&date_heure=" + dateHeure + "&status=enregistré");
+                    xhr.onreadystatechange = function() {
+                        if (xhr.readyState == 4 && xhr.status == 200) {
+                            console.log(xhr.responseText);
+                        }
+                    };
+                    xhr.send("coach_id=" + coachId + "&date_heure=" + dateHeure + "&action=" + action);
                 });
             });
         });
@@ -111,6 +128,7 @@ $heures = range(9, 20);
     <p class="text">Planning de <?= $prenom_coach ?> <?= $nom_coach ?></p><br>
 
     <p class="text2">Spécialité: <?= $specialite_coach ?></p>
+    
 
     <table>
         <thead>
@@ -126,7 +144,7 @@ $heures = range(9, 20);
                 <tr>
                     <td><?= $heure ?>:00 - <?= $heure + 2 ?>:00</td>
                     <?php foreach ($jours as $jour): ?>
-                        <td class="<?= isset($planning[$jour][$heure]) ? 'disponible' : 'indisponible' ?>" data-dateheure="<?= $jour . $heure ?>:00"></td>
+                        <td class="<?= isset($planning[$jour][$heure]) ? 'disponible' : 'indisponible' ?>" data-heure="<?= $heure ?>"></td>
                     <?php endforeach; ?>
                 </tr>
             <?php endforeach; ?>
