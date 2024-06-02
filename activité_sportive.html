@@ -9,6 +9,7 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
+            background-color: #333;
         }
         header {
             background-color: #F5A510;
@@ -117,7 +118,8 @@
             text-align: center;
             margin-top: 20px;
             font-size: 20px;
-            color: black;
+            color: orange;
+            padding-bottom: 300px;
         }
         .activities {
             background-color: #333;
@@ -196,15 +198,16 @@
     <section class="activities">
         <h2>Activités sportives</h2>
     </section>
-    <div class="initial-message">
-        Découvrez nos activités sportives encadrés par nos coachs professionnels!
-    </div>
+
     <div class="menu">
         <a href="#musculation">Musculation</a>
         <a href="#fitness">Fitness</a>
         <a href="#biking">Biking</a>
         <a href="#cardio-training">Cardio-Training</a>
         <a href="#cours-collectifs">Cours Collectifs</a>
+    </div>
+    <div class="initial-message">
+        Découvrez nos activités sportives encadrés par nos coachs professionnels!
     </div>
 
     <div id="musculation" class="coach-info">
@@ -260,7 +263,8 @@
             </table>
         </div>
             <div class="button-container">
-                <button>Prendre un RDV</button>
+                <button onclick="window.location.href = 'planning_vida.php';">Prendre un RDV</button>
+
                 <button onclick="toggleExtraButtons(this)">Communiquer avec le coach</button>
                 <button><a href="cv_vida.pdf" style="color: inherit; text-decoration: none;">Voir son CV</a></button>
             </div>
@@ -326,7 +330,7 @@
             </table>
         </div>
         <div class="button-container">
-            <button>Prendre un RDV</button>
+                <button onclick="window.location.href = 'planning_axel.php';">Prendre un RDV</button>
             <button onclick="toggleExtraButtons(this)">Communiquer avec le coach</button>
             <button><a href="cv_axel.pdf" style="color: inherit; text-decoration: none;">Voir son CV</a></button>
         </div>
@@ -392,7 +396,7 @@
             </table>
         </div>
         <div class="button-container">
-            <button>Prendre un RDV</button>
+                <button onclick="window.location.href = 'planning_lisa.php';">Prendre un RDV</button>
             <button onclick="toggleExtraButtons(this)">Communiquer avec le coach</button>
             <button><a href="cv_lisa.pdf" style="color: inherit; text-decoration: none;">Voir son CV</a></button>
         </div>
@@ -458,7 +462,7 @@
             </table>
         </div>
         <div class="button-container">
-            <button>Prendre un RDV</button>
+                <button onclick="window.location.href = 'planning_melinda.php';">Prendre un RDV</button>
             <button onclick="toggleExtraButtons(this)">Communiquer avec le coach</button>
             <button><a href="cv_melinda.pdf" style="color: inherit; text-decoration: none;">Voir son CV</a></button>
         </div>
@@ -524,7 +528,7 @@
             </table>
         </div>
         <div class="button-container">
-            <button>Prendre un RDV</button>
+                <button onclick="window.location.href = 'planning_alexiane.php';">Prendre un RDV</button>
             <button onclick="toggleExtraButtons(this)">Communiquer avec le coach</button>
             <button><a href="cv_alexiane.pdf" style="color: inherit; text-decoration: none;">Voir son CV</a></button>
         </div>
@@ -561,6 +565,15 @@
                 }
             });
         });
+        document.getElementById('tout-parcourir-btn').addEventListener('click', function(event) {
+            event.preventDefault();
+            var subMenu = document.getElementById('sub-menu');
+            if (subMenu.style.display === 'none' || subMenu.style.display === '') {
+                subMenu.style.display = 'block';
+            } else {
+                subMenu.style.display = 'none';
+            }
+        });
     </script>
 <script>
 document.addEventListener("DOMContentLoaded", function() {
@@ -578,4 +591,3 @@ document.addEventListener("DOMContentLoaded", function() {
 </script>
 </body>
 </html>
-
