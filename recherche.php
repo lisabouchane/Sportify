@@ -13,16 +13,39 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // Définition des noms de coachs et leur section correspondante
         $redirections = [
             'lisa' => 'activité_sportive.html#biking',
+            'biking' => 'activité_sportive.html#biking',
+            'B212' => 'activité_sportive.html#biking',
             'axel' => 'activité_sportive.html#fitness',
+             'B202' => 'activité_sportive.html#fitness',
+            'fitness' => 'activité_sportive.html#fitness',
             'vida' => 'activité_sportive.html#musculation',
+            'musculation' => 'activité_sportive.html#musculation',
             'melinda' => 'activité_sportive.html#cardio-training',
+            'cardio training' => 'activité_sportive.html#cardio-training',
+            'B213' => 'activité_sportive.html#cardio-training',
             'alex' => 'activité_sportive.html#cours-collectifs',
+            'B214' => 'activité_sportive.html#cours-collectifs',
+            'cours collectifs' => 'activité_sportive.html#cours-collectifs',
             'melissa' => 'sports_competition.html#Basket',
+            'B301' => 'sports_competition.html#Basket',
+            'basket' => 'sports_competition.html#Basket',
             'zinedine' => 'sports_competition.html#Football',
+            'B302' => 'sports_competition.html#Football',
+            'football' => 'sports_competition.html#Football',
             'bruno' => 'sports_competition.html#Rugby',
+            'B303' => 'sports_competition.html#Rugby',
+            'rugby' => 'sports_competition.html#Rugby',
             'david' => 'sports_competition.html#Tennis',
+            'B304' => 'sports_competition.html#Tennis',
             'laure' => 'sports_competition.html#Natation',
-            'maxime' => 'sports_competition.html#Plongeon'
+            'maxime' => 'sports_competition.html#Plongeon',
+            'tennis' => 'sports_competition.html#Tennis',
+            'natation' => 'sports_competition.html#Natation',
+            'B305' => 'sports_competition.html#Natation',
+            'plongeon' => 'sports_competition.html#Plongeon',
+            'B306' => 'sports_competition.html#Plongeon',
+            'B201' => 'activité_sportive.html#musculation',
+
         ];
 
         $rechercheLower = strtolower($recherche); // Convertir la recherche en minuscule
