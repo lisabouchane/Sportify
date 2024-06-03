@@ -25,6 +25,13 @@
             text-align: center;
             padding: 10px 0;
         }
+        .wrapper {
+            border: 0px solid #ccc;
+            max-width: 100%;
+            margin: 0px auto;
+            padding: 10px;
+            background-color: #333;
+        }
         .menu {
             background-color: #333;
             overflow: hidden;
@@ -464,6 +471,16 @@
     </footer>
 
     <script>
+        document.getElementById('tout-parcourir-btn').addEventListener('click', function(event) {
+            event.preventDefault();
+            var subMenu = document.getElementById('sub-menu');
+            if (subMenu.style.display === 'none' || subMenu.style.display === '') {
+                subMenu.style.display = 'block';
+            } else {
+                subMenu.style.display = 'none';
+            }
+        });
+
         function openChat() {
             document.getElementById('chatBox').style.display = 'block';
         }
