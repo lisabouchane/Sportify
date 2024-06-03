@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <title>Sportify: Consultation Sportive</title>
     <style>
-        body { 
+        body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
@@ -36,7 +36,7 @@
             margin: 0;
             font-size: 24px;
         }
-
+/* Styles pour le conteneur principal */
         .wrapper {
             border: 0px solid #ccc;
             max-width: 100%;
@@ -50,7 +50,7 @@
             color: black;
             font-weight: bold;
         }
-
+ /* Styles pour les liens de navigation */
         nav {
             text-align: center;
             margin: 20px 0;
@@ -72,7 +72,7 @@
             color: #333;
 
         }
-
+ /* Styles pour le sous-menu, initialement caché */
         .sub-menu {
             display: none;
             text-align: center;
@@ -97,7 +97,7 @@
             text-align: center;
             color: #333;
         }
-
+/* Styles pour les sections de la page */
         section {
             text-align: center;
             padding-top: 50px;
@@ -226,11 +226,12 @@
     </style>
 </head>
 <body>
-
+ <!-- Section en-tête de la page -->
     <header><span style="font-size: 42px;">Sportify</span> 
         <br><br><br> 
     </header>
     <div class = "wrapper">
+         <!-- Barre de navigation principale -->
         <nav>
             <a href="accueil.html">Accueil</a>
             <a href="#" id="tout-parcourir-btn">Tout Parcourir</a>
@@ -238,6 +239,7 @@
             <a href="#">Rendez-vous</a>
             <a href="index.html">Votre Compte</a>
         </nav>
+         <!-- Sous-menu, affiché lors du clic sur 'Tout Parcourir' -->
         <div class="sub-menu" id="sub-menu">
             <a href="activité_sportive.html" id="activité_sportive-link">Activités sportives</a>
             <a href="sports_competition.html" id="sports-competition-link">Les Sports de compétition</a>
@@ -249,15 +251,18 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<!-- Inclusion du CSS de Bootstrap, une bibliothèque de composants  -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
   <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
 
+<!-- Lien vers un fichier CSS externe pour des styles supplémentaires spécifiques au site -->
   <link rel="stylesheet" href="styles.css">
 
   <title>Nos coachs de sport</title>
 </head>
   <div id="hero-carousel" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-indicators">
+         <!-- Chaque bouton correspond à une diapositive du carrousel -->
       <button type="button" data-bs-target="#hero-carousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
       <button type="button" data-bs-target="#hero-carousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
       <button type="button" data-bs-target="#hero-carousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
@@ -265,6 +270,7 @@
       <button type="button" data-bs-target="#hero-carousel" data-bs-slide-to="4" aria-label="Slide 5"></button>
     </div>
 
+ <!-- Conteneur principal pour les éléments du carrousel -->
     <div class="carousel-inner">
       <div class="carousel-item active c-item">
         <img src="Bienvenue2.jpg" class="d-block w-100 c-img" alt="Slide 1">
@@ -322,6 +328,7 @@
         </div>
       </div>
     </div>
+    <!-- Contrôles de navigation pour passer à la diapositive précédente ou suivante -->
     <button class="carousel-control-prev" type="button" data-bs-target="#hero-carousel" data-bs-slide="prev">
       <span class="carousel-control-prev-icon" aria-hidden="true"></span>
       <span class="visually-hidden">Précédent</span>
@@ -352,7 +359,10 @@
 
             <p class="italic-text4">Nous retrouver :</p>
 
+<!-- Conteneur pour la carte google maps -->
+
     <div class="map-container">
+        <!-- Balise <iframe> intégrant une carte Google Maps -->
         <iframe 
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2624.5364824916036!2d2.2896013156759247!3d48.84883177928647!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e671c6b24f2cd7%3A0x6f98e5e56b1d39c3!2s10%20Rue%20Sextius%20Michel%2C%2075015%20Paris%2C%20France!5e0!3m2!1sen!2sus!4v1652874998836!5m2!1sen!2sus" 
             width="100%" 
@@ -370,6 +380,7 @@
         06 65 94 50 92 <br>
     </footer>
 
+    <!-- Script JavaScript pour gérer l'affichage du sous-menu -->
     <script>
         document.getElementById('tout-parcourir-btn').addEventListener('click', function(event) {
             event.preventDefault();
@@ -457,10 +468,10 @@
         slideImg();
     });
     </script>
-    <!-- Inclure le script Google Maps API avec votre clé API -->
+    <!-- Inclure le script Google Maps API avec la clé API -->
     <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap">
     </script>
 </body>
 </html>
-<!-- https://github.com/ByteGrad/bootstrap-5-carousel-slider/blob/master/styles.css -->
+
